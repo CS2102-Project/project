@@ -5,3 +5,12 @@ CS2102 project using laravel
 * Migrate the database by:
   * `php artisan migrate:refresh`
   * `php artisan make:migration function --create=table_name`
+## Trouble shooting
+Usually when you clone a Laravel Repository, you have to make this Step:
+- Composer install
+- Copy .env.example to .env and set the good values inside .env
+  * careful to use your own mysql settings
+source: https://stackoverflow.com/questions/37419545/cannot-serve-cloned-git-repository-in-my-local-machine
+Fixing RuntimeException No application encryption key has been specified error
+- simply run php artisan key:generate
+source: https://stackoverflow.com/questions/44839648/no-application-encryption-key-has-been-specified-new-laravel-app
