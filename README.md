@@ -12,9 +12,13 @@ Usually when you clone a Laravel Repository, you have to make this Step:
 - Composer install
 - Copy .env.example to .env and set the good values inside .env
   * careful to use your own mysql settings
+<<<<<<< HEAD
 
 
 source: https://stackoverflow.com/questions/37419545/cannot-serve-cloned-git-repository-in-my-local-machine
+=======
+source: https://stackoverflow.com/questions/37419545/cannot-serve-cloned-git-repository-in-my-local-machine  
+>>>>>>> origin/master
 
 Fixing RuntimeException No application encryption key has been specified error
 - simply run php artisan key:generate
