@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    //$books = DB::table('book')->get();
-    $title = 'Hello World';
-    return view('welcome', compact('title'));
-});
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
