@@ -31,9 +31,12 @@ class UserController extends Controller
    *
    * @return Response
    */
-  public function store()
+  public function store($username, $email, $mobile, $address, $password)
   {
-      //
+
+      DB::insert('insert into users (username, email, mobile, address, password) values (?, ?, ?, ?, ?)',
+      compact('username', 'email', 'mobile', 'address', 'password'));
+
   }
 
   /**
@@ -44,7 +47,7 @@ class UserController extends Controller
    */
   public function show($id)
   {
-      //
+      return view('users.profile', compact('id'))
   }
 
   /**
