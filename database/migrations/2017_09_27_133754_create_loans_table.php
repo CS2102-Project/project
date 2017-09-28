@@ -30,6 +30,7 @@ class CreateLoansTable extends Migration
             $table->timestamp('end')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->text('comments')->nullable()->default(null);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('status', 8)->nullable()->default(null);
         });
     }

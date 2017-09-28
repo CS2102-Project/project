@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
         if (Schema::hasTable($this->set_schema_table)) return;
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('userid');
+            $table->increments('id');
             $table->string('email');
             $table->string('username', 64);
             $table->string('password', 64);
@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->decimal('credit_rating', 10, 0)->nullable()->default(null);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('remember_token', 100)->default("DSC970520");
         });
     }
 
