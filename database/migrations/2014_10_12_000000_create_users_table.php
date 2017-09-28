@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->integer('points_available')->nullable()->default('500');
             $table->decimal('credit_rating', 10, 0)->nullable()->default(null);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
