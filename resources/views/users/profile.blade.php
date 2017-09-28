@@ -13,7 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        You are logged in as {{$email}}!
+                        You are logged in as {{$username}}!
 
                     <div class="panel-heading">Item Owned</div>
 

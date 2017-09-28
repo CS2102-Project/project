@@ -48,16 +48,17 @@ class LoginController extends Controller
         $data = $_POST;
         $email = $data['email'];
         $password_entered = $data['password'];
-        $sql = "select u.password from users u where u.email = '".$email."'";
+        $sql = "select u.password, u.username from users u where u.email = '".$email."'";
         $password_array = $db->query($sql);
         $password_record = $password_array->fetch_assoc();
-        $password_record = $password_record["password"];
-        if ((!$password_record)||($password_entered!=$password_record)) {
+        $password = $password_record["password"];
+        $username = $password_record["username"];
+        if ((!$password)||($password_entered!=$password)) {
             return view('home');
         }
         else {
             $this->middleware('authenticated');
-            return view('users.profile', compact ('email'));
+            return view('users.profile', compact ('email', 'username'));
         }
     }
 }
