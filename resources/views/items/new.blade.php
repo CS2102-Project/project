@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">New Item Creation</div>
+                    <div class="panel-heading">New Item Record For You :-)</div>
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('newItemSubmit') }}">
                             {{ csrf_field() }}
@@ -23,8 +23,8 @@
                             <div class="form-group">
                                 <label for="Description" class="col-md-4 control-label">Description</label>
 
-                                <div class="col-md-6">
-                                    <input id="Description" type="text" class="form-control" name="Description" required>
+                                <div class="col-md-12">
+                                    <input id="Description" type="textarea" class="form-control" name="Description" required>
                                 </div>
                             </div>
 

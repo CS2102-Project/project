@@ -22,4 +22,4 @@ Route::get('/home', 'HomeController@index');
 Route::get('/users/{id}', 'UserController@show')->name('users.id');
 Route::post('/users/{id}', 'UserController@show')->name('users.id');
 Route::get('/items/form', 'ItemController@create')->name('newItemView');
-Route::post('/items/new', 'ItemController@store')->name('newItemSubmit');
+Route::post('/items/form', 'ItemController@store')->name('newItemSubmit');
