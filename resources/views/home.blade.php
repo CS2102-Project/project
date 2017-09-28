@@ -13,7 +13,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    Please log in or sign up to use this app!
+                    <div>
+                        Credentials incorrect or you are not signed in.
+                    </div>
+
+                        <div>
+                            Please log in or sign up to use this app!
+                        </div>
                 </div>
             </div>
         </div>

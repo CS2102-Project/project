@@ -15,8 +15,11 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
+//Route::post('/register', 'Auth\RegisterController@create');
+//Route::post('/login', 'Auth\LoginController@authenticate')->name('login');
 
-Route::post('/register', 'Auth\RegisterController@create');
-Route::post('/login', 'Auth\LoginController@login');
-
-Route::get('/users/{id}', 'UserController@show');
+Route::get('/users/{id}', 'UserController@show')->name('users.id');
+Route::post('/users/{id}', 'UserController@show')->name('users.id');
+Route::get('/items/form', 'ItemController@create')->name('newItemView');
+Route::post('/items/new', 'ItemController@store')->name('newItemSubmit');

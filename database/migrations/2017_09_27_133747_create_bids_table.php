@@ -28,6 +28,7 @@ class CreateBidsTable extends Migration
             $table->integer('post')->nullable()->default(null);
             $table->integer('points');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->char('status', 7)->nullable()->default(null);
         });
     }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Request;
 use DB;
-
+use mysqli;
 
 class UserController extends Controller
 {
@@ -64,9 +64,18 @@ class UserController extends Controller
    */
   public function show($id)
   {
-      $username = 'Shaocong';
-      //$username = DB:statement('select u.username from users as u where u.userid = $id');
-      return view('users.profile', compact('id', 'username'));
+      $db = new mysqli('localhost', 'root', 'admin', 'blog');
+      if($db->connect_errno > 0){
+          die('Unable to connect to database [' . $db->connect_error . ']');
+      }
+
+      $sql = "select u.username from users as u where u.id = ".$id;
+      $result_array = $db->query($sql)->fetch_assoc();
+      $username = $result_array["username"];
+      $sql = "select u.email from users as u where u.id = ".$id;
+      $result_array = $db->query($sql)->fetch_assoc();
+      $email = $result_array["email"];
+      return view('users.profile', compact('id', 'username', 'email'));
   }
 
   /**
