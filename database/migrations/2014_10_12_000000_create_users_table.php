@@ -23,7 +23,8 @@ class CreateUsersTable extends Migration
         if (Schema::hasTable($this->set_schema_table)) return;
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('email');
+            $table->increments('userid');
+            $table->string('email');
             $table->string('username', 64);
             $table->string('password', 64);
             $table->integer('mobile');
