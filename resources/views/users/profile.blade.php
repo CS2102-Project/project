@@ -15,6 +15,8 @@
                         @endif
                         You are logged in as {{$username}}!
 
+
+
                     <div class="panel-heading">Item Owned</div>
 
                     <div class="panel-body">

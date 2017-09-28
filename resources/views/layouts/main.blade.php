@@ -43,7 +43,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ $email }} <span class="caret"></span>
+                            {{ Auth::user()['email'] }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
@@ -59,6 +59,21 @@
                                 </form>
                             </li>
                         </ul>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{{ route('newItemView') }}"
+                                   onclick="event.preventDefault();
+                                             document.getElementById('new-item-form').submit();">
+                                    New Item
+                                </a>
+
+                                <form id="new-item-form" action="{{ route('newItemView') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+
                     </li>
                 </ul>
             </div>
