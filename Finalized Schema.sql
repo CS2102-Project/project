@@ -1,3 +1,4 @@
+use blog;
 DROP TABLE IF EXISTS loans;
 DROP TABLE IF EXISTS bids;
 DROP TABLE IF EXISTS posts;

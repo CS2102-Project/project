@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use DB;
+use mysqli;
 
 class LoginController extends Controller
 {
@@ -35,5 +37,27 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login()
+    {
+        $db = new mysqli('localhost', 'root', 'admin', 'blog');
+        if($db->connect_errno > 0){
+            die('Unable to connect to database [' . $db->connect_error . ']');
+        }
+        $data = $_POST;
+        $email = $data['email'];
+        $password_entered = $data['password'];
+        $sql = "select u.password from users u where u.email = '".$email."'";
+        $password_array = $db->query($sql);
+        $password_record = $password_array->fetch_assoc();
+        $password_record = $password_record["password"];
+        if ((!$password_record)||($password_entered!=$password_record)) {
+            return view('home');
+        }
+        else {
+            $this->middleware('authenticated');
+            return view('users.profile', compact ('email'));
+        }
     }
 }
