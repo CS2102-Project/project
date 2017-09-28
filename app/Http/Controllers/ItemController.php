@@ -11,7 +11,7 @@ class ItemController extends Controller
     public function create ()
     {
         $user = Auth::user();
-        return view('pets.new', compact($user));
+        return view('items.new', compact($user));
     }
 
     public function store ()
