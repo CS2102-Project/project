@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+use DB;
+
 
 class UserController extends Controller
 {
@@ -29,25 +31,42 @@ class UserController extends Controller
   /**
    * Store a newly created resource in storage.
    *
-   * @return Response
+   * @return array
    */
-  public function store($username, $email, $mobile, $address, $password)
+  public function store()
   {
 
-      DB::insert('insert into users (username, email, mobile, address, password) values (?, ?, ?, ?, ?)',
-      compact('username', 'email', 'mobile', 'address', 'password'));
+      $input = Request::all();
+      $username = $input['username'];
+      $email = $input['email'];
+      $mobile = $input['mobile'];
+      $address = $input['address'];
+      $password = $input['password'];
+      //{"_token":"rTdqcdRyXOyhuysbr8upWorrRw0MYNZRYGQPB8pM","username":"123","email":"123@1.com","mobile":"1231","address":"123","password":"123123","password_confirmation":"123123"}
+
+      $id = 1;
+      //$id = DB:statement('select u.userid from users as u where u.username = $username');
+
+      //DB::statement('insert into users (username, email, mobile, address, password)
+      //            values ($username, $email, $mobile, $address, $password)');
+      //
+      return redirect('users/'.$id);
 
   }
 
   /**
    * Display the specified resource.
+   * Fetch all the items owned for this user (DB)
+   * Fetch all the items bid for this user (DB)
    *
    * @param  int  $id
    * @return Response
    */
   public function show($id)
   {
-      return view('users.profile', compact('id'))
+      $username = 'Shaocong';
+      //$username = DB:statement('select u.username from users as u where u.userid = $id');
+      return view('users.profile', compact('id', 'username'));
   }
 
   /**

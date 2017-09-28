@@ -7,15 +7,30 @@ use Illuminate\Database\Migrations\Migration;
 class CreatePostsTable extends Migration
 {
     /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $set_schema_table = 'posts';
+
+    /**
      * Run the migrations.
+     * @table posts
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        if (Schema::hasTable($this->set_schema_table)) return;
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('postid');
+            $table->integer('item')->nullable()->default(null);
+            $table->timestamp('start')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('end')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('title', 64);
+            $table->string('location', 128);
+            $table->text('description')->nullable()->default(null);
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
@@ -26,6 +41,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists($this->set_schema_table);
     }
 }
