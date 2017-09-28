@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use mysqli;
 
@@ -68,23 +71,29 @@ class RegisterController extends Controller
     protected function create()
     {
         $data = $_POST;
-        $email = $data['email'];
-        $user = User::create([
+        return User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'address' => $data['address'],
             'password' => $data['password'],
         ]);
-        $db = new mysqli('localhost', 'root', 'admin', 'blog');
-        if($db->connect_errno > 0){
-            die('Unable to connect to database [' . $db->connect_error . ']');
-        }
-        $sql = "select u.userid from users u where u.email = '{$email}'";
-        $result = $db->query($sql)->fetch_assoc();
-        $userid = $result['userid'];
-        //return view('users.profile', compact ('email'));
-        //return redirect()->route("users.{$userid}");
-        return redirect()->route('login');
+
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+        $this->guard()->login($user);
+        return $this->registered($request, $user)
+            ?: redirect('/users/'.$user['id']);
+        //redirectPath()
     }
 }

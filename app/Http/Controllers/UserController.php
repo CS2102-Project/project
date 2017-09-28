@@ -69,10 +69,10 @@ class UserController extends Controller
           die('Unable to connect to database [' . $db->connect_error . ']');
       }
 
-      $sql = "select u.username from users as u where u.userid = ".$id;
+      $sql = "select u.username from users as u where u.id = ".$id;
       $result_array = $db->query($sql)->fetch_assoc();
       $username = $result_array["username"];
-      $sql = "select u.email from users as u where u.userid = ".$id;
+      $sql = "select u.email from users as u where u.id = ".$id;
       $result_array = $db->query($sql)->fetch_assoc();
       $email = $result_array["email"];
       return view('users.profile', compact('id', 'username', 'email'));

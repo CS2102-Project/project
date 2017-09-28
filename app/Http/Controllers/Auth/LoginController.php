@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use DB;
 use mysqli;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -39,7 +40,12 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login()
+    /**
+     *
+     * Add the self-defined function with signature to prevent from overriding
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function login_shaocong()
     {
         $db = new mysqli('localhost', 'root', 'admin', 'blog');
         if($db->connect_errno > 0){
@@ -59,6 +65,30 @@ class LoginController extends Controller
         else {
             $this->middleware('authenticated');
             return view('users.profile', compact ('email', 'username'));
+        }
+    }
+
+    /**
+     *
+     * Add signature to this self defined functions to prevent from overriding
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     */
+    public function authenticate_shaocong()
+    {
+        $data = $_POST;
+        $email = $data['email'];
+        $password = $data['password'];
+        print($email);
+        print($password);
+        if (Auth::attempt(['email' => $email, 'password' => $password]))
+        {
+            //return redirect()->route('profile');
+            return view('users.profile', compact ('email', 'username'));
+        }
+        else
+        {
+            print('error');
         }
     }
 }
