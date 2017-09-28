@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use DB;
 use mysqli;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
@@ -45,7 +47,7 @@ class LoginController extends Controller
      * Add the self-defined function with signature to prevent from overriding
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function login_shaocong()
+    public function login()
     {
         $db = new mysqli('localhost', 'root', 'admin', 'blog');
         if($db->connect_errno > 0){
@@ -91,4 +93,17 @@ class LoginController extends Controller
             print('error');
         }
     }
+
+    public function username()
+    {
+        return 'email';
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->username() => 'required', 'password' => 'required',
+        ]);
+    }
+
 }

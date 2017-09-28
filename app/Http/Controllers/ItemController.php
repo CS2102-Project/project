@@ -26,7 +26,7 @@ class ItemController extends Controller
             'description' => $data['Description'],
             'available' => 'true',
         ]);
-        $userid = $user['userid'];
+        $userid = $user['id'];
         return redirect('users/'.$userid);
     }
 }

@@ -54,25 +54,22 @@
                                     Logout
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
-
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
                                 <a href="{{ route('newItemView') }}"
                                    onclick="event.preventDefault();
                                              document.getElementById('new-item-form').submit();">
                                     New Item
                                 </a>
 
-                                <form id="new-item-form" action="{{ route('newItemView') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
+                                <form id="new-item-form" action="{{ route('newItemView') }}" method="GET" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+
                             </li>
                         </ul>
+
 
                     </li>
                 </ul>
