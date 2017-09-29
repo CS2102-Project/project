@@ -119,16 +119,24 @@ class UserController extends Controller
   {
       $input = Request::all();
       $email = $input['email'];
+      $password = $input['password'];
       $db = new mysqli('localhost', 'root', 'admin', 'blog');
       if($db->connect_errno > 0){
           die('Unable to connect to database [' . $db->connect_error . ']');
       }
 
-      $sql = "select u.id from users as u where u.email = '".$email."';";
+      $sql = "select u.id, u.password from users as u where u.email = '".$email."';";
       $result_array = $db->query($sql);
       $result = $result_array->fetch_assoc();
       $userid = $result["id"];
+      $correct_password = $result['password'];
       $user = User::find($userid);
+
+      if ((!$user) || !(password_verify($password, $correct_password)))
+      {
+          //return [bcrypt($password), $correct_password]; //view('home');
+          return view('home');
+      }
       Auth::login($user, true);
       return redirect('users/'.$userid);
 

@@ -13,7 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        You are logged in as {{$username}}!
+                        <h5>You are logged in as {{$username}}!</h5>
 
 
                     <div class="panel-heading">
@@ -46,6 +46,9 @@
                                         <button type='submit' class='btn btn-primary'>
                                         Delete
                                         </button>
+                                        <button type='submit' class='btn btn-primary'>
+                                        Post
+                                        </button>
                                     </div>
                                 </div>";
                             }
@@ -55,10 +58,27 @@
 
                     </div>
 
-                    <div class="panel-heading">Item Bid</div>
+                    <hr>
+
+
+                    <div class="panel-heading">
+                        <h4>Item Bidding</h4>
+                    </div>
 
                     <div class="panel-body">
-                        Empty
+                        Name: 123<br>
+                        Points: 100<br>
+                        Success: false<br>
+                        <div class='form-group'>
+                            <div class='col-md-8 col-md-offset-4'>
+                                <button type='submit' class='btn btn-primary'>
+                                    Update
+                                </button>
+                                <button type='submit' class='btn btn-primary'>
+                                    Withdraw
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
