@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Request;
 use DB;
 use mysqli;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class UserController extends Controller
 {
@@ -109,5 +113,24 @@ class UserController extends Controller
   public function destroy($id)
   {
       //
+  }
+
+  public function login()
+  {
+      $input = Request::all();
+      $email = $input['email'];
+      $db = new mysqli('localhost', 'root', 'admin', 'blog');
+      if($db->connect_errno > 0){
+          die('Unable to connect to database [' . $db->connect_error . ']');
+      }
+
+      $sql = "select u.id from users as u where u.email = '".$email."';";
+      $result_array = $db->query($sql);
+      $result = $result_array->fetch_assoc();
+      $userid = $result["id"];
+      $user = User::find($userid);
+      Auth::login($user, true);
+      return redirect('users/'.$userid);
+
   }
 }
