@@ -1,0 +1,342 @@
+Table name: table1  Migration File: 2017_09_28_000000_create_table1_table.php
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateUsersTable extends Migration
+{
+    /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $set_schema_table = 'users';
+
+    /**
+     * Run the migrations.
+     * @table users
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (Schema::hasTable($this->set_schema_table)) return;
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('email');
+            $table->string('username', 64);
+            $table->string('password', 64);
+            $table->integer('mobile');
+            $table->string('address', 128)->nullable()->default(null);
+            $table->integer('points_available')->nullable()->default('500');
+            $table->decimal('credit_rating', 10, 0)->nullable()->default(null);
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+     public function down()
+     {
+       Schema::dropIfExists($this->set_schema_table);
+     }
+}
+
+
+
+Table name: users  Migration File: 2017_09_28_000000_create_users_table.php
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateBidsTable extends Migration
+{
+    /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $set_schema_table = 'bids';
+
+    /**
+     * Run the migrations.
+     * @table bids
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (Schema::hasTable($this->set_schema_table)) return;
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('bidid');
+            $table->integer('bidder')->nullable()->default(null);
+            $table->integer('post')->nullable()->default(null);
+            $table->integer('points');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->char('status', 7)->nullable()->default(null);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+     public function down()
+     {
+       Schema::dropIfExists($this->set_schema_table);
+     }
+}
+
+
+
+Table name: bids  Migration File: 2017_09_28_000000_create_bids_table.php
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateItemsTable extends Migration
+{
+    /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $set_schema_table = 'items';
+
+    /**
+     * Run the migrations.
+     * @table items
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (Schema::hasTable($this->set_schema_table)) return;
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('itemid');
+            $table->string('name', 64);
+            $table->string('owner')->nullable()->default(null);
+            $table->text('description')->nullable()->default(null);
+            $table->string('available', 5)->nullable()->default(null);
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+     public function down()
+     {
+       Schema::dropIfExists($this->set_schema_table);
+     }
+}
+
+
+
+Table name: items  Migration File: 2017_09_28_000000_create_items_table.php
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreatePostsTable extends Migration
+{
+    /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $set_schema_table = 'posts';
+
+    /**
+     * Run the migrations.
+     * @table posts
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (Schema::hasTable($this->set_schema_table)) return;
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('postid');
+            $table->integer('item')->nullable()->default(null);
+            $table->timestamp('start')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('end')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('title', 64);
+            $table->string('location', 128);
+            $table->text('description')->nullable()->default(null);
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+     public function down()
+     {
+       Schema::dropIfExists($this->set_schema_table);
+     }
+}
+
+
+
+Table name: posts  Migration File: 2017_09_28_000000_create_posts_table.php
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateMigrationsTable extends Migration
+{
+    /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $set_schema_table = 'migrations';
+
+    /**
+     * Run the migrations.
+     * @table migrations
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (Schema::hasTable($this->set_schema_table)) return;
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->string('migration');
+            $table->integer('batch');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+     public function down()
+     {
+       Schema::dropIfExists($this->set_schema_table);
+     }
+}
+
+
+
+Table name: migrations  Migration File: 2017_09_28_000000_create_migrations_table.php
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreatePasswordResetsTable extends Migration
+{
+    /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $set_schema_table = 'password_resets';
+
+    /**
+     * Run the migrations.
+     * @table password_resets
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (Schema::hasTable($this->set_schema_table)) return;
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->string('email');
+            $table->string('token');
+            $table->timestamp('created_at')->nullable()->default(null);
+
+            $table->index(["email"], 'password_resets_email_index');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+     public function down()
+     {
+       Schema::dropIfExists($this->set_schema_table);
+     }
+}
+
+
+
+Table name: password_resets  Migration File: 2017_09_28_000000_create_password_resets_table.php
+
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateLoansTable extends Migration
+{
+    /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $set_schema_table = 'loans';
+
+    /**
+     * Run the migrations.
+     * @table loans
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (Schema::hasTable($this->set_schema_table)) return;
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('loanid');
+            $table->integer('bid')->nullable()->default(null);
+            $table->integer('post')->nullable()->default(null);
+            $table->timestamp('start')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('end')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->text('comments')->nullable()->default(null);
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('status', 8)->nullable()->default(null);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+     public function down()
+     {
+       Schema::dropIfExists($this->set_schema_table);
+     }
+}
