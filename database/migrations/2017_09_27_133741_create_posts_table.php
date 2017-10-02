@@ -24,7 +24,7 @@ class CreatePostsTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('postid');
-            $table->integer('item')->nullable()->default(null);
+            $table->integer('item')->references('itemid')->on('items')->onDelete('cascade');
             $table->timestamp('start')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('end')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('title', 64);

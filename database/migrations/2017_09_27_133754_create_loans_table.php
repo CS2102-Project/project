@@ -24,8 +24,8 @@ class CreateLoansTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('loanid');
-            $table->integer('bid')->nullable()->default(null);
-            $table->integer('post')->nullable()->default(null);
+            $table->integer('bid')->references('bidid')->on('bids')->onDelete('cascade');
+            $table->integer('post')->references('postid')->on('posts')->onDelete('cascade');
             $table->timestamp('start')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('end')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->text('comments')->nullable()->default(null);

@@ -24,8 +24,8 @@ class CreateBidsTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('bidid');
-            $table->integer('bidder')->nullable()->default(null);
-            $table->integer('post')->nullable()->default(null);
+            $table->string('bidder', 64)->references('email')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('post')->references('postid')->on('posts')->onDelete('cascade');
             $table->integer('points');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));

@@ -132,7 +132,7 @@ class UserController extends Controller
       $correct_password = $result['password'];
       $user = User::find($userid);
 
-      if ((!$user) || !(password_verify($password, $correct_password)))
+      if ((!$user) || ($password!=$correct_password))
       {
           //return [bcrypt($password), $correct_password]; //view('home');
           return view('home');
