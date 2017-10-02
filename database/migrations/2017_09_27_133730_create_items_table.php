@@ -25,9 +25,9 @@ class CreateItemsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('itemid');
             $table->string('name', 64);
-            $table->string('owner')->nullable()->default(null);
+            $table->string('owner', 256)->references('email')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->text('description')->nullable()->default(null);
-            $table->string('available', 5)->nullable()->default(null);
+            $table->string('available', 5)->nullable()->default('TRUE');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

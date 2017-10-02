@@ -5,7 +5,8 @@ DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
-    email VARCHAR(64) PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(64),
     username VARCHAR(64) NOT NULL,
     password VARCHAR(64) NOT NULL,
     mobile INT NOT NULL,
