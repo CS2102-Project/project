@@ -53,7 +53,33 @@
                                 </div>";
                             }
                             $items_owned->close();
-                        ?>
+
+                            $sql = "select p.title, p.location, p.created_at, i.name from posts p, items i where p.item = i.itemid AND i.owner = '".
+							$email."';";
+                            $posts = $db->query($sql);
+                            $index = 1;
+
+                            while($row = $posts->fetch_assoc()){
+                                echo $index."  <br />";
+                                echo "Item name:". $row['name']; echo"<br />";
+                                echo "Post title:" .$row['title'];echo"<br />";
+                                echo "Created at:" .$row['created_at'];echo"<br />";
+                                echo "Pick up location:". $row['location'];echo"<br /><br /><br />";
+                                $index++;
+                                echo "
+                                <div class='form-group'>
+                                    <div class='col-md-8 col-md-offset-4'>
+                                        <button type='submit' class='btn btn-primary'>
+                                        Edit
+                                        </button>
+                                        <button type='submit' class='btn btn-primary'>
+                                        Delete
+                                        </button>
+                                    </div>
+                                </div>";
+                            }
+                            $posts->close();
+						?>
 
 
                     </div>
