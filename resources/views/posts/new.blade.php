@@ -13,9 +13,10 @@
                             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                                 <label for="Item" class="col-md-4 control-label"> Item </label>
 
-                                <div class="col-md-6">
-                                    <input id="Item" type="text" class="form-control" name="Item" value="{{ old('Item') }}" required autofocus>
-
+								<div class="form-group{{ $db->query('select i.itemid from items as i')->has('Item') ? 'has-error' : '' }}">
+									<div class="col-md-6">
+										<input id="Item" type="text" class="form-control" name="Item" value="{{ old('Item') }}" required autofocus>
+									</div>
                                 </div>
                             </div>
 
