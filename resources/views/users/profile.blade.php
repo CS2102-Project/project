@@ -13,8 +13,9 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <h5>You are logged in as {{$username}}!</h5>
+                    <h5>You are logged in as {{$username}}!</h5>
 
+                    <hr>
 
                     <div class="panel-heading">
                         <h4>Item Owned</h4>
@@ -53,6 +54,17 @@
                                 </div>";
                             }
                             $items_owned->close();
+                        ?>
+                    </div>
+                    <hr>
+
+                    <div class="panel-heading">
+                        <h4>Item Posted</h4>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <?php
 
                             $sql = "select p.title, p.location, p.created_at, i.name from posts p, items i where p.item = i.itemid AND i.owner = '".
 							$email."';";
@@ -88,23 +100,39 @@
 
 
                     <div class="panel-heading">
-                        <h4>Item Bidding</h4>
+                        <h4>Item Bid</h4>
                     </div>
 
                     <div class="panel-body">
-                        Name: 123<br>
-                        Points: 100<br>
-                        Success: false<br>
-                        <div class='form-group'>
-                            <div class='col-md-8 col-md-offset-4'>
-                                <button type='submit' class='btn btn-primary'>
-                                    Update
-                                </button>
-                                <button type='submit' class='btn btn-primary'>
-                                    Withdraw
-                                </button>
-                            </div>
-                        </div>
+                        <?php
+
+                        $sql = "select b.post, b.points, b.updated_at, b.status from bids b where b.bidder = '".
+                            $email."';";
+                        $posts = $db->query($sql);
+                        $index = 1;
+
+                        while($row = $posts->fetch_assoc()){
+                            echo $index."  <br />";
+                            echo "Bid post:". $row['post']; echo"<br />";
+                            echo "Bidding points:" .$row['points'];echo"<br />";
+                            echo "Last Update:" .$row['update_at'];echo"<br />";
+                            echo "Bid Status:". $row['status'];echo"<br /><br /><br />";
+                            $index++;
+                            echo "
+                                <div class='form-group'>
+                                    <div class='col-md-8 col-md-offset-4'>
+                                        <button type='submit' class='btn btn-primary'>
+                                        Update
+                                        </button>
+                                        <button type='submit' class='btn btn-primary'>
+                                        Withdraw
+                                        </button>
+                                    </div>
+                                </div>";
+                        }
+                        $posts->close();
+                        ?>
+
                     </div>
 
                 </div>
