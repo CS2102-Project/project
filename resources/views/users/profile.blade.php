@@ -14,7 +14,18 @@
                             </div>
                         @endif
                     <h5>You are logged in as {{$username}}!</h5>
+                            <script>
+                                alert("You are logged in.");
 
+                                function myTestFunction() {
+                                    alert("You clicked this button!");
+                                }
+
+                                function editItem( itemId ) {
+                                    alert("Editing "+itemId+"!");
+
+                                }
+                            </script>
                     <hr>
 
                     <div class="panel-heading">
@@ -37,11 +48,14 @@
                                 echo "Name:". $row['name']; echo"<br />";
                                 echo "Description:" .$row['description'];echo"<br />";
                                 echo "Available:". $row['available'];echo"<br /><br /><br />";
+
                                 $index++;
+                                $current_item_id = $row['itemid']; // this is for clicking events handle
+
                                 echo "
                                 <div class='form-group'>
                                     <div class='col-md-8 col-md-offset-4'>
-                                        <button type='submit' class='btn btn-primary'>
+                                        <button type='submit' class='btn btn-primary' onclick='editItem(".$current_item_id.")'>
                                         Edit
                                         </button>
                                         <button type='submit' class='btn btn-primary'>
