@@ -21,7 +21,7 @@ class PostController extends Controller
         if($db->connect_errno > 0){
             die('Unable to connect to database [' . $db->connect_error . ']');
         }
-        $sql = "INSERT INTO posts (item, title, location, description) VALUES (" .$itemId.",".$title.",".$location.","."$description".");";
+        $sql = "INSERT INTO posts (item, title, location, description) VALUES ('" .$itemId."','".$title."','".$location."','".$description."');";
         //print($sql);
         //return 1;
         $db->query($sql);
