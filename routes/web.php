@@ -24,3 +24,6 @@ Route::get('/users/{id}', 'UserController@show')->name('users.id');
 Route::post('/users/{id}', 'UserController@show')->name('users.id');
 Route::get('/items/form', 'ItemController@create')->name('newItemView');
 Route::post('/items/form', 'ItemController@store')->name('newItemSubmit');
+
+Route::get('/items/{id}/edit', 'ItemController@editShow')->name('items.getEdit');
+Route::post('/items/{id}/edit', array('uses' => 'ItemController@editUpdate', 'as'=>'items.editSubmit'));

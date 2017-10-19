@@ -15,16 +15,16 @@
                         @endif
                     <h5>You are logged in as {{$username}}!</h5>
                             <script>
-                                alert("You are logged in.");
+                                //alert("You are logged in.");
 
-                                function myTestFunction() {
+                                function myTestButtonFunction() {
                                     alert("You clicked this button!");
                                 }
 
                                 function editItem( itemId ) {
-                                    alert("Editing "+itemId+"!");
-
+                                    window.location = ('../items/'+itemId +'/edit');
                                 }
+
                             </script>
                     <hr>
 
