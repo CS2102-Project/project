@@ -5,39 +5,42 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">New Post For You :-)</div>
+                    <div class="panel-heading">Editing Item Record For You :-)</div>
+
+                    <script>
+                        function editSubmit() {
+                            alert("edit submit button clicked!");
+                            window.location.href = "/";
+                        }
+
+                    </script>
+
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('posts.submit', $itemId) }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('newItemSubmit') }}">
                             {{ csrf_field() }}
 
-                            <div class="form-group">
-                                <label for="Title" class="col-md-4 control-label">Title</label>
+                            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                                <label for="ItemName" class="col-md-4 control-label"> Name </label>
 
-                                <div class="col-md-12">
-                                    <input id="Title" type="textarea" class="form-control" name="Title" required>
+                                <div class="col-md-6">
+                                    <input id="ItemName" type="text" class="form-control" name="ItemName" value="<?php echo ($itemName); ?>" required autofocus>
+
                                 </div>
                             </div>
-							
-                            <div class="form-group">
-                                <label for="Location" class="col-md-4 control-label">Location</label>
 
-                                <div class="col-md-12">
-                                    <input id="Location" type="textarea" class="form-control" name="Location" required>
-                                </div>
-                            </div>
 
                             <div class="form-group">
                                 <label for="Description" class="col-md-4 control-label">Description</label>
 
                                 <div class="col-md-12">
-                                    <input id="Description" type="textarea" class="form-control" name="Description" required>
+                                    <input id="Description" type="textarea" class="form-control" name="Description" value="<?php echo ($itemDescription); ?>" required>
                                 </div>
                             </div>
-							
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Submit
+                                        Edit
                                     </button>
                                 </div>
                             </div>
