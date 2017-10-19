@@ -71,5 +71,10 @@ class PostController extends Controller
         return redirect('users/'.$userid);
     }
 
+    public function marketOverview()
+    {
+        $user = Auth::user();
+        return view('posts.market', compact('user'));
+    }
 
 }
