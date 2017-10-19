@@ -33,6 +33,14 @@
                                     window.location = ('../items/'+itemId+'/post');
                                 }
 
+                                function editPost( postId ) {
+                                    alert("you are editing "+ postId);
+                                }
+
+                                function deletePost( postId ) {
+                                    window.location = ('../posts/'+postId +'/delete');
+                                }
+
                             </script>
                     <hr>
 
@@ -88,7 +96,7 @@
 
                         <?php
 
-                            $sql = "select p.title, p.location, p.created_at, i.name from posts p, items i where p.item = i.itemid AND i.owner = '".
+                            $sql = "select p.title, p.location, p.created_at, p.postid, i.name from posts p, items i where p.item = i.itemid AND i.owner = '".
 							$email."';";
                             $posts = $db->query($sql);
                             $index = 1;
@@ -99,14 +107,17 @@
                                 echo "Post title:" .$row['title'];echo"<br />";
                                 echo "Created at:" .$row['created_at'];echo"<br />";
                                 echo "Pick up location:". $row['location'];echo"<br /><br /><br />";
+
                                 $index++;
+                                $current_post_id = $row['postid'];
+
                                 echo "
                                 <div class='form-group'>
                                     <div class='col-md-8 col-md-offset-4'>
-                                        <button type='submit' class='btn btn-primary'>
+                                        <button type='submit' class='btn btn-primary' onclick='editPost(".$current_post_id.")'>
                                         Edit
                                         </button>
-                                        <button type='submit' class='btn btn-primary'>
+                                        <button type='submit' class='btn btn-primary' onclick='deletePost(".$current_post_id.")'>
                                         Delete
                                         </button>
                                     </div>

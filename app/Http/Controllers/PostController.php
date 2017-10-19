@@ -28,4 +28,20 @@ class PostController extends Controller
         return redirect('users/'.$userid);
 
     }
+
+    public function delete($postId)
+    {
+        $user = Auth::user();
+        $userid = $user['id'];
+
+        $db = new mysqli('localhost', 'root', 'admin', 'blog');
+        if($db->connect_errno > 0){
+            die('Unable to connect to database [' . $db->connect_error . ']');
+        }
+        $sql = "DELETE from posts where posts.postid = ".$postId.";";
+        $db->query($sql);
+        return redirect('users/'.$userid);
+    }
+
+
 }
