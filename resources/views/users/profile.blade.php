@@ -25,6 +25,10 @@
                                     window.location = ('../items/'+itemId +'/edit');
                                 }
 
+                                function deleteItem( itemId ) {
+                                    window.location = ('../items/'+itemId +'/delete');
+                                }
+
                             </script>
                     <hr>
 
@@ -58,7 +62,7 @@
                                         <button type='submit' class='btn btn-primary' onclick='editItem(".$current_item_id.")'>
                                         Edit
                                         </button>
-                                        <button type='submit' class='btn btn-primary'>
+                                        <button type='submit' class='btn btn-primary' onclick='deleteItem(".$current_item_id.")'>
                                         Delete
                                         </button>
                                         <button type='submit' class='btn btn-primary'>

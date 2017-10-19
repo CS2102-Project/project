@@ -6,20 +6,6 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Editing Item Record For You :-)</div>
-                    <?php
-                        $db = new mysqli('localhost', 'root', 'admin', 'blog');
-                        if($db->connect_errno > 0){
-                            die('Unable to connect to database [' . $db->connect_error . ']');
-                        }
-                        $sql = "select * from items i where i.itemid = ". $itemId.";";
-                        $items_owned = $db->query($sql);
-                        $index = 1;
-
-                        $row = $items_owned->fetch_assoc();
-                        $itemName = $row['name'];
-                        $itemDescription = $row['description'];
-
-                    ?>
 
                     <script>
                         function editSubmit() {
