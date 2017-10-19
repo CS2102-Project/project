@@ -84,4 +84,9 @@ class ItemController extends Controller
 
     }
 
+    public function post ($itemId)
+    {
+        return view('posts.new', compact('itemId'));
+    }
+
 }

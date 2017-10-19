@@ -29,6 +29,10 @@
                                     window.location = ('../items/'+itemId +'/delete');
                                 }
 
+                                function postItem( itemId ) {
+                                    window.location = ('../items/'+itemId+'/post');
+                                }
+
                             </script>
                     <hr>
 
@@ -65,7 +69,7 @@
                                         <button type='submit' class='btn btn-primary' onclick='deleteItem(".$current_item_id.")'>
                                         Delete
                                         </button>
-                                        <button type='submit' class='btn btn-primary'>
+                                        <button type='submit' class='btn btn-primary' onclick='postItem(".$current_item_id.")'>
                                         Post
                                         </button>
                                     </div>

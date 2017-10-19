@@ -29,3 +29,6 @@ Route::get('/items/{id}/edit', 'ItemController@editShow')->name('items.getEdit')
 Route::post('/items/{id}/edit', array('uses' => 'ItemController@editUpdate', 'as'=>'items.editSubmit'));
 
 Route::get('items/{id}/delete', 'ItemController@delete')->name('items.delete');
+
+Route::get('items/{id}/post', 'ItemController@post')->name('items.post');
+Route::post('items/{id}/post', 'PostController@postSubmit')->name('posts.submit');
