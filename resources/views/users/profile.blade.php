@@ -34,7 +34,7 @@
                                 }
 
                                 function editPost( postId ) {
-                                    alert("you are editing "+ postId);
+                                    window.location = ('../posts/'+postId+'/edit');
                                 }
 
                                 function deletePost( postId ) {

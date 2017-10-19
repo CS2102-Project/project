@@ -34,3 +34,5 @@ Route::get('items/{id}/post', 'ItemController@post')->name('items.post');
 Route::post('items/{id}/post', 'PostController@postSubmit')->name('posts.submit');
 
 Route::get('posts/{id}/delete', 'PostController@delete')->name('posts.delete');
+Route::get('posts/{id}/edit', 'PostController@editShow')->name('posts.editShow');
+Route::post('posts/{id}/edit', 'PostController@editSubmit')->name('posts.editSubmit');

@@ -43,5 +43,15 @@ class PostController extends Controller
         return redirect('users/'.$userid);
     }
 
+    public function editShow($postId)
+    {
+        return view('posts.edit',compact('postId'));
+    }
+
+    public function editSubmit($postId)
+    {
+
+    }
+
 
 }
