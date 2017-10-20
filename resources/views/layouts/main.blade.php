@@ -67,10 +67,8 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                    Logout
+                                <a href="{{ route('users.id', $userid) }}">
+                                    Dash Board
                                 </a>
 
                                 <a href="{{ route('newItemView') }}"
@@ -86,6 +84,12 @@
 
                                 <a href="{{ route('users.transactionDisplay', $userid) }}">
                                     Transactions
+                                </a>
+
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    Logout
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
