@@ -111,7 +111,7 @@ class PostController extends Controller
         {
             echo ("<script> 
                         alert('You do not have enough points available!'); 
-                        window.location.href = '../../posts/".$postId."/bid'
+                        window.location.href = '../../posts/".$postId."/bid';
                    </script>");
         }
 

@@ -5,3 +5,4 @@ SELECT * from posts p where p.item not in (
 
 --Insert new entries into bids table
 INSERT INTO bids (bidder, post, points) VALUES (email, postid, points);
+

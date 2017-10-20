@@ -41,6 +41,14 @@
                                     window.location = ('../posts/'+postId +'/delete');
                                 }
 
+                                function deleteBid( bidId ) {
+                                    window.location = ('../bids/'+bidId +'/delete');
+                                }
+
+                                function updateBid( bidId ) {
+                                    window.location = ('../bids/'+bidId +'/edit');
+                                }
+
                             </script>
                     <hr>
 
@@ -140,7 +148,7 @@
                     <div class="panel-body">
                         <?php
 
-                        $sql = "select b.post, b.points, b.updated_at, b.status from bids b where b.bidder = '".
+                        $sql = "select b.post, b.points, b.updated_at, b.status, b.bidid from bids b where b.bidder = '".
                             $email."';";
                         $posts = $db->query($sql);
                         $index = 1;
@@ -151,14 +159,17 @@
                             echo "Bidding points:" .$row['points'];echo"<br />";
                             echo "Last Update:" .$row['updated_at'];echo"<br />";
                             echo "Bid Status:". $row['status'];echo"<br /><br /><br />";
+
                             $index++;
+                            $current_bid_id = $row['bidid'];
+
                             echo "
                                 <div class='form-group'>
                                     <div class='col-md-8 col-md-offset-4'>
-                                        <button type='submit' class='btn btn-primary'>
+                                        <button type='submit' class='btn btn-primary' onclick='updateBid(".$current_bid_id.")'>
                                         Update
                                         </button>
-                                        <button type='submit' class='btn btn-primary'>
+                                        <button type='submit' class='btn btn-primary' onclick='deleteBid(".$current_bid_id.")'>
                                         Withdraw
                                         </button>
                                     </div>
