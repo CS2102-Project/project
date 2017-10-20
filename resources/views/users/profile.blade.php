@@ -57,6 +57,10 @@
                                     window.location = ('../bids/'+bidId +'/edit');
                                 }
 
+                                function returnLoan( loanId ) {
+                                    alert("return this loan:" + loanId);
+                                }
+
                             </script>
                     <hr>
 
@@ -182,8 +186,50 @@
                                         </button>
                                     </div>
                                 </div>";
-                        }
-                        $posts->close();
+                            }
+                            $posts->close();
+                        ?>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="panel-heading">
+                        <h4>Borrowing</h4>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <?php
+                            $sql = "select p.title, p.description, l.start, l.loanid from loans l, bids b, posts p where p.postid = b.post and l.bid = b.bidid and b.bidder = '".
+                                $email."';";
+                            $results = $db->query($sql);
+                            $index = 1;
+
+                            while($row = $results->fetch_assoc()){
+
+                                echo $index."  <br />";
+                                echo "Post:". $row['title']; echo"<br />";
+                                echo "Description:" .$row['description'];echo"<br />";
+                                echo "Start at:" .$row['start'];echo"<br /><br /><br />";
+
+                                $index++;
+                                $current_loan_id = $row['loanid'];
+
+                                echo "
+                                <div class='form-group'>
+                                    <div class='col-md-8 col-md-offset-4'>
+                                        <button type='submit' class='btn btn-primary' onclick='returnLoan(".$current_loan_id.")'>
+                                        Return it
+                                        </button>
+                                    </div>
+                                </div>";
+
+                            }
+
+
+                            $results->close();
+
                         ?>
 
                     </div>
