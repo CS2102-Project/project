@@ -15,11 +15,24 @@
 </head>
 <body>
 <script>
+
     function marketRedirect() {
         //alert('You are clicking this.');
         window.location = '../markets';
     }
+
+    function transactionRedirect( userId ) {
+        alert("Accesssing transactions of "+ userId);
+    }
+
 </script>
+
+<?php
+    $user = \Illuminate\Support\Facades\Auth::user();
+    $userid = $user['id'];
+
+?>
+
 <div id="app">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
@@ -69,6 +82,10 @@
                                 <a href="{{ route('markets') }}"
                                    onclick="marketRedirect()">
                                     Markets
+                                </a>
+
+                                <a href="{{ route('users.transactionDisplay', $userid) }}">
+                                    Transactions
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

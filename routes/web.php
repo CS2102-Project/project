@@ -45,3 +45,5 @@ Route::get('/markets', 'PostController@marketOverview')->name('markets');
 Route::get('bids/{id}/delete', 'BidController@delete')->name('bids.delete');
 Route::get('bids/{id}/edit', 'BidController@editShow')->name('bids.editShow');
 Route::post('bids/{id}/edit', 'BidController@editSubmit')->name('bids.editSubmit');
+
+Route::get('/users/{id}/transactions', 'UserController@transactionsDisplay')->name('users.transactionDisplay');

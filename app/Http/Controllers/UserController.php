@@ -141,4 +141,11 @@ class UserController extends Controller
       return redirect('users/'.$userid);
 
   }
+
+  public function transactionsDisplay( $userId )
+  {
+      return "Transactions";
+  }
+
 }
+
