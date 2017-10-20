@@ -149,7 +149,7 @@
                             echo $index."  <br />";
                             echo "Bid post:". $row['post']; echo"<br />";
                             echo "Bidding points:" .$row['points'];echo"<br />";
-                            echo "Last Update:" .$row['update_at'];echo"<br />";
+                            echo "Last Update:" .$row['updated_at'];echo"<br />";
                             echo "Bid Status:". $row['status'];echo"<br /><br /><br />";
                             $index++;
                             echo "

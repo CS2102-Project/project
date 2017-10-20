@@ -39,5 +39,5 @@ Route::post('posts/{id}/edit', 'PostController@editSubmit')->name('posts.editSub
 
 Route::get('posts/{id}/bid', 'PostController@bidPost')->name('posts.bidPost');
 Route::post('posts/{id}/bid', 'PostController@bidPointSubmit')->name('posts.bidPointSubmit');
-≠
+
 Route::get('/markets', 'PostController@marketOverview')->name('markets');

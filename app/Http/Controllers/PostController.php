@@ -115,7 +115,11 @@ class PostController extends Controller
                    </script>");
         }
 
-        //Secondly we
+        //Secondly we will proceed to the update of the current user's bidding
+        //We don't update its bidding point (incomplete transaction)
+        $sql = "INSERT INTO bids (bidder, post, points) VALUES ('".$email."', ".$postId.", ".$point.")";
+        $db->query($sql);
+        return redirect('users/'.$userid);
 
     }
 
