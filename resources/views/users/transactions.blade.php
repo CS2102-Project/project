@@ -119,6 +119,29 @@
                         if($db->connect_errno > 0){
                             die('Unable to connect to database [' . $db->connect_error . ']');
                         }
+                        $sql = "SELECT u1.username as owner, u2.username as bidder, b.points, b.updated_at as time
+                        FROM users u1, users u2, bids b, items i, posts p
+                        WHERE b.bidder = u2.email AND b.post = p.postid AND p.item = i.itemid AND i.owner = u1.email
+                        AND (b.bidder = '".$email."' OR i.owner = '".$email."') AND b.status = 'SUCCESS'
+                        ORDER BY time desc;";
+                        //print($sql);
+
+                        $related_history = $db -> query($sql);
+                        while($row = $related_history->fetch_assoc()){
+
+                            $owner = $row['owner'];
+                            $bidder = $row['bidder'];
+                            $points_bided = $row['points'];
+                            $time = $row['time'];
+
+                            echo "Owner:". $owner ."<br>";
+                            echo "Bidder:". $bidder ."<br>";
+                            echo "Points:". $points_bided ."<br>";
+                            echo "Time:". $time ."<br><br><br>";
+
+                        }
+                         
+
 
                         ?>
                     </div>
