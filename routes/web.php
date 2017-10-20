@@ -36,3 +36,12 @@ Route::post('items/{id}/post', 'PostController@postSubmit')->name('posts.submit'
 Route::get('posts/{id}/delete', 'PostController@delete')->name('posts.delete');
 Route::get('posts/{id}/edit', 'PostController@editShow')->name('posts.editShow');
 Route::post('posts/{id}/edit', 'PostController@editSubmit')->name('posts.editSubmit');
+
+Route::get('posts/{id}/bid', 'PostController@bidPost')->name('posts.bidPost');
+Route::post('posts/{id}/bid', 'PostController@bidPointSubmit')->name('posts.bidPointSubmit');
+
+Route::get('/markets', 'PostController@marketOverview')->name('markets');
+
+Route::get('bids/{id}/delete', 'BidController@delete')->name('bids.delete');
+Route::get('bids/{id}/edit', 'BidController@editShow')->name('bids.editShow');
+Route::post('bids/{id}/edit', 'BidController@editSubmit')->name('bids.editSubmit');

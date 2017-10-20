@@ -14,6 +14,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+<script>
+    function marketRedirect() {
+        //alert('You are clicking this.');
+        window.location = '../markets';
+    }
+</script>
 <div id="app">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
@@ -58,6 +64,11 @@
                                    onclick="event.preventDefault();
                                              document.getElementById('new-item-form').submit();">
                                     New Item
+                                </a>
+
+                                <a href="{{ route('markets') }}"
+                                   onclick="marketRedirect()">
+                                    Markets
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
