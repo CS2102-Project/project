@@ -93,4 +93,23 @@ class BidController extends Controller
 
     }
 
+    public function accept ($bidId)
+    {
+        $user = Auth::user();
+        $userid = $user['id'];
+
+        $db = new mysqli('localhost', 'root', 'admin', 'blog');
+        if($db->connect_errno > 0){
+            die('Unable to connect to database [' . $db->connect_error . ']');
+        }
+        $sql = "UPDATE bids set bids.status = 'SUCCESS' where bids.bidid = ".$bidId.";";
+
+        //print($sql);
+        //return 1;
+        $db->query($sql);
+
+        return redirect('users/'.$userid.'/transactions');
+    }
+
+
 }

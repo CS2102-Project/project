@@ -27,7 +27,7 @@
                     <script>
 
                         function acceptBid( bidId ) {
-                            alert("Accept Bid "+bidId);
+                            window.location = "../../bids/"+bidId+"/accept";
                         }
 
                         function rejectBid( bidId ) {
@@ -69,13 +69,17 @@
                                     continue;
                                 }
 
-                            echo "<strong>".$index++."</strong>  <br />";
+                            echo "<strong>".$index++.".</strong> ";
                             echo "<strong>Post Title:". $current_title ."</strong><br/>";
 
                             while($row_inner = $related_bids->fetch_assoc()){
 
                                 $points = $row_inner['points'];
                                 $bidder = $row_inner['bidder'];
+                                $status = $row_inner['status'];
+                                if ($status == 'SUCCESS'){
+                                    continue;
+                                }
                                 $current_bid_id = $row_inner['bidid'];
 
                                 echo "Bidder:". $bidder."<br>";
