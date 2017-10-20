@@ -43,6 +43,7 @@ Route::post('posts/{id}/bid', 'PostController@bidPointSubmit')->name('posts.bidP
 Route::get('/markets', 'PostController@marketOverview')->name('markets');
 
 Route::get('bids/{id}/delete', 'BidController@delete')->name('bids.delete');
+Route::get('bids/{id}/reject', 'BidController@reject')->name('bids.reject');
 Route::get('bids/{id}/edit', 'BidController@editShow')->name('bids.editShow');
 Route::post('bids/{id}/edit', 'BidController@editSubmit')->name('bids.editSubmit');
 
