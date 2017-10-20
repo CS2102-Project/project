@@ -37,4 +37,7 @@ Route::get('posts/{id}/delete', 'PostController@delete')->name('posts.delete');
 Route::get('posts/{id}/edit', 'PostController@editShow')->name('posts.editShow');
 Route::post('posts/{id}/edit', 'PostController@editSubmit')->name('posts.editSubmit');
 
+Route::get('posts/{id}/bid', 'PostController@bidPost')->name('posts.bidPost');
+Route::post('posts/{id}/bid', 'PostController@bidPointSubmit')->name('posts.bidPointSubmit');
+
 Route::get('/markets', 'PostController@marketOverview')->name('markets');

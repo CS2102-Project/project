@@ -22,6 +22,49 @@
 
                     </div>
 
+                    <script>
+                        function bidPost (postId) {
+                            //alert("you want to bid for this one: "+ postId);
+                            window.location = 'posts/'+postId+'/bid';
+                        }
+                    </script>
+
+
+                    <div class="panel-body">
+
+                        <?php
+                        $db = new mysqli('localhost', 'root', 'admin', 'blog');
+                        if($db->connect_errno > 0){
+                            die('Unable to connect to database [' . $db->connect_error . ']');
+                        }
+                        $sql = "select * from posts p";
+                        $all_posts_not_owned = $db->query($sql);
+                        $index = 1;
+
+                        while($row = $all_posts_not_owned->fetch_assoc()){
+                            echo $index."  <br />";
+                            echo "ItemId:". $row['item']; echo"<br />";
+                            echo "Title:". $row['title']; echo"<br />";
+                            echo "Description:" .$row['description'];echo"<br />";
+                            echo "Created_at:". $row['created_at'];echo"<br /><br /><br />";
+
+                            $index++;
+                            $current_post_id = $row['postid']; // this is for clicking events handle
+
+                            echo "
+                                <div class='form-group'>
+                                    <div class='col-md-8 col-md-offset-4'>
+                                        <button type='submit' class='btn btn-primary' onclick='bidPost(".$current_post_id.")'>
+                                        Bid
+                                        </button>
+                                    </div>
+                                </div>";
+                        }
+                        $all_posts_not_owned->close();
+                        ?>
+                    </div>
+
+
                 </div>
             </div>
         </div>

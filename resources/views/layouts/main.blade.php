@@ -16,7 +16,7 @@
 <body>
 <script>
     function marketRedirect() {
-        alert('You are clicking this.');
+        //alert('You are clicking this.');
         window.location = '../markets';
     }
 </script>
