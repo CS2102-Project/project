@@ -13,7 +13,15 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+
+                    <?php
+                        $user = \Illuminate\Support\Facades\Auth::user();
+                        $points_available = $user['points_available'];
+                    ?>
+
                     <h5>You are logged in as {{$username}}!</h5>
+                    <h5>You have {{$points_available}} points available.</h5>
+
                             <script>
                                 //alert("You are logged in.");
 
