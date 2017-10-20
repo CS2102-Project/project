@@ -144,7 +144,7 @@ class UserController extends Controller
 
   public function transactionsDisplay( $userId )
   {
-      return "Transactions";
+      return view('users.transactions',compact('userId'));
   }
 
 }
