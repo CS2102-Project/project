@@ -9,6 +9,7 @@
 
                     <?php
                         $username = $user['username'];
+                        $email = $user['email'];
 
                     ?>
                     <div class="panel-body">
@@ -37,13 +38,12 @@
                         if($db->connect_errno > 0){
                             die('Unable to connect to database [' . $db->connect_error . ']');
                         }
-                        $sql = "select * from posts p";
+                        $sql = "SELECT * from posts p where p.item not in ( SELECT i.itemid from items i where i.owner ='".$email."');";
                         $all_posts_not_owned = $db->query($sql);
                         $index = 1;
 
                         while($row = $all_posts_not_owned->fetch_assoc()){
                             echo $index."  <br />";
-                            echo "ItemId:". $row['item']; echo"<br />";
                             echo "Title:". $row['title']; echo"<br />";
                             echo "Description:" .$row['description'];echo"<br />";
                             echo "Created_at:". $row['created_at'];echo"<br /><br /><br />";

@@ -1,2 +1,4 @@
 --For markets display, select posts that don't belong to the current user
-SELECT
+SELECT * from posts p where p.item not in (
+  SELECT i.itemid from items i where i.owner = user_email
+);
