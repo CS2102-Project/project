@@ -113,6 +113,7 @@ class PostController extends Controller
                         alert('You do not have enough points available!'); 
                         window.location.href = '../../posts/".$postId."/bid';
                    </script>");
+            return('What happened');
         }
 
         //Secondly we will proceed to the update of the current user's bidding

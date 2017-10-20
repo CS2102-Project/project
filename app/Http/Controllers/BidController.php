@@ -53,14 +53,15 @@ class BidController extends Controller
         $result = $db->query($sql);
         $row = $result -> fetch_assoc();
         $available_points = $row['points_available'];
-
         //Notify the user that he or she does not own enough points for this bidding (double check)
         if ($available_points < $points_updated)
         {
+            //return("Not enough points");
             echo ("<script> 
                         alert('You do not have enough points available!'); 
                         window.location.href = '../../bids/".$bidId."/edit';
                    </script>");
+            return ('What happened');
         }
 
         //Next we proceed and update its bidding points
