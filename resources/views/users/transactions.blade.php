@@ -14,11 +14,11 @@
                             </div>
                         @endif
                     <?php
-                    $user = \Illuminate\Support\Facades\Auth::user();
-                    $username = $user['username'];
-                    $userid = $user['id'];
-                    $email = $user['email'];
-                    $points_available = $user['points_available'];
+                        $user = \Illuminate\Support\Facades\Auth::user();
+                        $username = $user['username'];
+                        $userid = $user['id'];
+                        $email = $user['email'];
+                        $points_available = $user['points_available'];
                     ?>
 
                     <h5>You are logged in as {{$username}}!</h5>
@@ -109,7 +109,7 @@
                     </div>
 
                     <div class="panel-heading">
-                        <h4>Past Transactions</h4>
+                        <h4>Posts Lending</h4>
                     </div>
 
                     <div class="panel-body">
@@ -119,26 +119,33 @@
                         if($db->connect_errno > 0){
                             die('Unable to connect to database [' . $db->connect_error . ']');
                         }
-                        $sql = "SELECT u1.username as owner, u2.username as bidder, b.points, b.updated_at as time
-                        FROM users u1, users u2, bids b, items i, posts p
-                        WHERE b.bidder = u2.email AND b.post = p.postid AND p.item = i.itemid AND i.owner = u1.email
-                        AND (b.bidder = '".$email."' OR i.owner = '".$email."') AND b.status = 'SUCCESS'
-                        ORDER BY time desc;";
+                        //$sql = "SELECT u1.username as owner, u2.username as bidder, b.points, b.updated_at as time
+                        //FROM users u1, users u2, bids b, items i, posts p
+                        //WHERE b.bidder = u2.email AND b.post = p.postid AND p.item = i.itemid AND i.owner = u1.email
+                        //AND (b.bidder = '".$email."' OR i.owner = '".$email."') AND b.status = 'SUCCESS'
+                        //ORDER BY time desc;";
                         //print($sql);
-
+                        $sql = "SELECT u.username as bidder, p.title as title, b.points as points, l.created_at as time from users u, bids b, loans l, posts p, items i
+                                WHERE u.email = b.bidder and b.bidid = l.bid and l.post = p.postid and p.item = i.itemid
+                                and i.owner = '".$email."' and l.status = 'USING';";
+                        //print($sql);
+                        $index  = 1;
                         $related_history = $db -> query($sql);
                         while($row = $related_history->fetch_assoc()){
 
-                            $owner = $row['owner'];
+                            //$owner = $row['owner'];
+                            $title = $row['title'];
                             $bidder = $row['bidder'];
                             $points_bided = $row['points'];
                             $time = $row['time'];
 
-                            echo "Owner:". $owner ."<br>";
+                            echo $index;echo"<br>";
+                            echo "Title:". $title ."<br>";
                             echo "Bidder:". $bidder ."<br>";
                             echo "Points:". $points_bided ."<br>";
                             echo "Time:". $time ."<br><br><br>";
 
+                            $index++;
                         }
                          
 
@@ -146,8 +153,46 @@
                         ?>
                     </div>
 
+                    <div class="panel-heading">
+                        <h4>Past Transactions</h4>
+                    </div>
 
 
+                    <div class="panel-body">
+
+                        <?php
+                        $db = new mysqli('localhost', 'root', 'admin', 'blog');
+                        if($db->connect_errno > 0){
+                            die('Unable to connect to database [' . $db->connect_error . ']');
+                        }
+                        $sql = "SELECT u1.username as owner, u2.username as bidder, b.points, b.updated_at as time
+                        FROM users u1, users u2, bids b, items i, posts p, loans l
+                        WHERE b.bidder = u2.email AND b.post = p.postid AND p.item = i.itemid AND i.owner = u1.email
+                        AND (b.bidder = '".$email."' OR i.owner = '".$email."') AND b.status = 'SUCCESS' AND l.bid = b.bidid
+                        AND l.status = 'RETURNED' ORDER BY time desc;";
+                        //print($sql);
+                            $index  = 1;
+
+                        $related_history = $db -> query($sql);
+                        while($row = $related_history->fetch_assoc()){
+
+                            $owner = $row['owner'];
+                            //$title = $row['title'];
+                            $bidder = $row['bidder'];
+                            $points_bided = $row['points'];
+                            $time = $row['time'];
+                            echo $index;echo"<br>";
+                            echo "Owner:". $owner ."<br>";
+                            echo "Bidder:". $bidder ."<br>";
+                            echo "Points:". $points_bided ."<br>";
+                            echo "Time:". $time ."<br><br><br>";
+                            $index++;
+                        }
+
+
+
+                        ?>
+                    </div>
 
                 </div>
             </div>
