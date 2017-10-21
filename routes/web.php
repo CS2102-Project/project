@@ -49,3 +49,5 @@ Route::get('bids/{id}/edit', 'BidController@editShow')->name('bids.editShow');
 Route::post('bids/{id}/edit', 'BidController@editSubmit')->name('bids.editSubmit');
 
 Route::get('/users/{id}/transactions', 'UserController@transactionsDisplay')->name('users.transactionDisplay');
+
+Route::get('/loans/{id}/return', 'LoanController@returnLoan')->name('loans.returnLoan');

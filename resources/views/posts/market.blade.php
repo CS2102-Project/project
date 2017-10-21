@@ -10,6 +10,7 @@
                     <?php
                         $username = $user['username'];
                         $email = $user['email'];
+                        $points_available = $user['points_available'];
 
                     ?>
                     <div class="panel-body">
@@ -19,6 +20,7 @@
                             </div>
                         @endif
                         <h5>You are logged in as {{$username}}!</h5>
+                        <h5>You have {{$points_available}} points available.</h5>
                         <hr>
 
                     </div>

@@ -108,6 +108,16 @@ class BidController extends Controller
         //return 1;
         $db->query($sql);
 
+        $sql = "SELECT b.post from bids b where b.bidid = ".$bidId.";";
+        $post = $db->query($sql);
+        $result = $post->fetch_assoc();
+        $postid = $result['post'];
+
+        $sql = "INSERT INTO loans (bid, post, status) values(".$bidId.", ".$postid.", 'USING') ;";
+        //print($sql);
+        //return 1;
+        $db -> query($sql);
+
         return redirect('users/'.$userid.'/transactions');
     }
 
