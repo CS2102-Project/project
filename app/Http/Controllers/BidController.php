@@ -103,20 +103,39 @@ class BidController extends Controller
             die('Unable to connect to database [' . $db->connect_error . ']');
         }
         $sql = "UPDATE bids set bids.status = 'SUCCESS' where bids.bidid = ".$bidId.";";
-
         //print($sql);
         //return 1;
         $db->query($sql);
 
+        $sql = "SELECT i.id, b.points from bids b, users i where b.bidder = i.email and b.bidid = ".$bidId.";";
+        //print($sql);
+        //return 1;
+        $bids = $db->query($sql);
+        $result = $bids->fetch_assoc();
+
+        $bidderid = $result['id'];
+        $points = $result['points'];
+
+
         $sql = "SELECT b.post from bids b where b.bidid = ".$bidId.";";
+
         $post = $db->query($sql);
         $result = $post->fetch_assoc();
         $postid = $result['post'];
 
         $sql = "INSERT INTO loans (bid, post, status) values(".$bidId.", ".$postid.", 'USING') ;";
         //print($sql);
+
+        $db -> query($sql);
+
+        $sql = "UPDATE users set users.points_available = users.points_available + ".$points." where users.id = ".$userid.";";
+        //print($sql);
         //return 1;
         $db -> query($sql);
+
+        $sql = "UPDATE users set users.points_available = users.points_available - ".$points." where users.id = ".$bidderid.";";
+        $db -> query($sql);
+
 
         return redirect('users/'.$userid.'/transactions');
     }
