@@ -8,6 +8,11 @@ SELECT itemid, AVERAGE(popularity)
 FROM item_popularity;
 
 SELECT u.email, AVERAGE(i.popularity)
-FROM users u, item_popularity item
+FROM users u, item_popularity i
 WHERE u.email = i.owner
+GROUP BY u.email;
+
+SELECT u.email, AVERAGE(i.popularity)
+FROM users u, item_popularity i, posts p, bids b, loans loans
+WHERE u.email = b.bidder AND b.bidid = l.bid AND b.post = p.postid AND p.item = i.itemid
 GROUP BY u.email;
