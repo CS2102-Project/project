@@ -163,25 +163,39 @@
 
 
                     <div class="panel-heading">
-                        <h4>Item Bid</h4>
+                        <h4>Item Bidding</h4>
                     </div>
 
                     <div class="panel-body">
                         <?php
 
-                        $sql = "select b.post, b.points, b.updated_at, b.status, b.bidid, i.avatar, p.title from bids b, posts p, items i where
+                        $sql = "select b.post, b.points, b.updated_at, b.status, b.bidid, i.avatar, p.title, p.postid from bids b, posts p, items i where
                                 b.post = p.postid and p.item = i.itemid and b.bidder = '". $email."';";
                         $posts = $db->query($sql);
                         $index = 1;
 
+
                         while($row = $posts->fetch_assoc()){
+                            $postid = $row['postid'];
+
+                            $sql = "SELECT MAX(b.points) as maxi
+                            FROM bids b, posts p
+                            WHERE b.post = p.postid AND p.postid = ".$postid.";";
+
+                            $maxPoints = $db->query($sql);
+                            $pointsMaxstats = $maxPoints->fetch_assoc();
+                            $maxiBiddingPoints = $pointsMaxstats['maxi'];
+
+
                             $itemImage = $row['avatar'];
+
 
                             echo "<img src=\"/uploads/items/".$itemImage."\" style=\"width:64px; height:64px; top:10px; left:10px; border-radius:50%\">";
 
                             echo $index."  <br />";
                             echo "Bid post:". $row['title']; echo"<br />";
                             echo "Bidding points:" .$row['points'];echo"<br />";
+                            echo "Max Bid Points:" .$maxiBiddingPoints;echo"<br />";
                             echo "Last Update:" .$row['updated_at'];echo"<br />";
                             echo "Bid Status:". $row['status'];echo"<br /><br /><br />";
 
