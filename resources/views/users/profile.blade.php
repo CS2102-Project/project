@@ -58,7 +58,7 @@
                                 }
 
                                 function returnLoan( loanId ) {
-                                    alert("return this loan:" + loanId);
+                                    window.location = ('../loans/'+loanId +'/return');
                                 }
 
                             </script>
@@ -202,7 +202,7 @@
 
                         <?php
                             $sql = "select p.title, p.description, l.start, l.loanid from loans l, bids b, posts p where p.postid = b.post and l.bid = b.bidid and b.bidder = '".
-                                $email."';";
+                                $email."' and l.status = 'USING';";
                             $results = $db->query($sql);
                             $index = 1;
 
