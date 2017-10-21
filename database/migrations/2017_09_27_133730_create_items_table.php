@@ -30,6 +30,7 @@ class CreateItemsTable extends Migration
             $table->string('available', 5)->nullable()->default('TRUE');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('avatar')->default('DefaultItem.png');
         });
     }
 

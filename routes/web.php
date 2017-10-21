@@ -22,6 +22,7 @@ Route::post('/login','UserController@login');
 
 Route::get('/users/{id}', 'UserController@show')->name('users.id');
 Route::post('/users/{id}', 'UserController@show')->name('users.id');
+Route::get('/users/{id}/statistics', 'UserController@showStatistics')->name('users.statistics');
 Route::get('/items/form', 'ItemController@create')->name('newItemView');
 Route::post('/items/form', 'ItemController@store')->name('newItemSubmit');
 

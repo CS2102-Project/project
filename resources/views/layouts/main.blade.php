@@ -67,8 +67,13 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
+
+                                <a href="{{ route('users.statistics', $userid) }}">
+                                    Statistics
+                                </a>
+
                                 <a href="{{ route('users.id', $userid) }}">
-                                    Dash Board
+                                    Dashboard
                                 </a>
 
                                 <a href="{{ route('newItemView') }}"

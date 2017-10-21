@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">New Item Record For You :-)</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('newItemSubmit') }}">
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('newItemSubmit') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
@@ -27,6 +27,17 @@
                                     <input id="Description" type="textarea" class="form-control" name="Description" required>
                                 </div>
                             </div>
+
+
+                            <div class="form-group">
+                                <label for="ItemImage" class="col-md-4 control-label">Item Image</label>
+
+                                <div class="col-md-12">
+                                    <input id="ItemImage" type="file" name="avatar">
+                                </div>
+                            </div>
+
+
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">

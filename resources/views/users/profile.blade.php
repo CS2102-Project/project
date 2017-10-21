@@ -80,6 +80,10 @@
                             $index = 1;
 
                             while($row = $items_owned->fetch_assoc()){
+
+                                $itemImage = $row['avatar'];
+
+                                echo "<img src=\"/uploads/items/".$itemImage."\" style=\"width:64px; height:64px; top:10px; left:10px; border-radius:50%\">";
                                 echo $index."  <br />";
                                 echo "Name:". $row['name']; echo"<br />";
                                 echo "Description:" .$row['description'];echo"<br />";
@@ -116,12 +120,17 @@
 
                         <?php
 
-                            $sql = "select p.title, p.location, p.created_at, p.postid, p.description, i.name from posts p, items i where p.item = i.itemid AND i.owner = '".
+                            $sql = "select p.title, p.location, p.created_at, p.postid, p.description, i.name, i.avatar from posts p, items i where p.item = i.itemid AND i.owner = '".
 							$email."';";
                             $posts = $db->query($sql);
                             $index = 1;
 
                             while($row = $posts->fetch_assoc()){
+
+                                $itemImage = $row['avatar'];
+
+                                echo "<img src=\"/uploads/items/".$itemImage."\" style=\"width:64px; height:64px; top:10px; left:10px; border-radius:50%\">";
+
                                 echo $index."  <br />";
                                 echo "Item name:". $row['name']; echo"<br />";
                                 echo "Post title:" .$row['title'];echo"<br />";
@@ -154,21 +163,39 @@
 
 
                     <div class="panel-heading">
-                        <h4>Item Bid</h4>
+                        <h4>Item Bidding</h4>
                     </div>
 
                     <div class="panel-body">
                         <?php
 
-                        $sql = "select b.post, b.points, b.updated_at, b.status, b.bidid from bids b where b.bidder = '".
-                            $email."';";
+                        $sql = "select b.post, b.points, b.updated_at, b.status, b.bidid, i.avatar, p.title, p.postid from bids b, posts p, items i where
+                                b.post = p.postid and p.item = i.itemid and b.bidder = '". $email."';";
                         $posts = $db->query($sql);
                         $index = 1;
 
+
                         while($row = $posts->fetch_assoc()){
+                            $postid = $row['postid'];
+
+                            $sql = "SELECT MAX(b.points) as maxi
+                            FROM bids b, posts p
+                            WHERE b.post = p.postid AND p.postid = ".$postid.";";
+
+                            $maxPoints = $db->query($sql);
+                            $pointsMaxstats = $maxPoints->fetch_assoc();
+                            $maxiBiddingPoints = $pointsMaxstats['maxi'];
+
+
+                            $itemImage = $row['avatar'];
+
+
+                            echo "<img src=\"/uploads/items/".$itemImage."\" style=\"width:64px; height:64px; top:10px; left:10px; border-radius:50%\">";
+
                             echo $index."  <br />";
-                            echo "Bid post:". $row['post']; echo"<br />";
+                            echo "Bid post:". $row['title']; echo"<br />";
                             echo "Bidding points:" .$row['points'];echo"<br />";
+                            echo "Max Bid Points:" .$maxiBiddingPoints;echo"<br />";
                             echo "Last Update:" .$row['updated_at'];echo"<br />";
                             echo "Bid Status:". $row['status'];echo"<br /><br /><br />";
 
@@ -207,7 +234,6 @@
                             $index = 1;
 
                             while($row = $results->fetch_assoc()){
-
                                 echo $index."  <br />";
                                 echo "Post:". $row['title']; echo"<br />";
                                 echo "Description:" .$row['description'];echo"<br />";

@@ -40,11 +40,16 @@
                         if($db->connect_errno > 0){
                             die('Unable to connect to database [' . $db->connect_error . ']');
                         }
-                        $sql = "SELECT * from posts p where p.item not in ( SELECT i.itemid from items i where i.owner ='".$email."');";
+                        $sql = "SELECT p.postid, p.title, p.description, p.created_at, i1.avatar from posts p, items i1 where p.item not in ( SELECT i.itemid from items i where i.owner ='".$email."')
+                                and p.item = i1.itemid;";
                         $all_posts_not_owned = $db->query($sql);
                         $index = 1;
 
                         while($row = $all_posts_not_owned->fetch_assoc()){
+                            $itemImage = $row['avatar'];
+
+                            echo "<img src=\"/uploads/items/".$itemImage."\" style=\"width:64px; height:64px; top:10px; left:10px; border-radius:50%\">";
+
                             echo $index."  <br />";
                             echo "Title:". $row['title']; echo"<br />";
                             echo "Description:" .$row['description'];echo"<br />";

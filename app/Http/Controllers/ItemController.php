@@ -6,6 +6,8 @@ use Request;
 use Illuminate\Support\Facades\Auth;
 use App\Item;
 use mysqli;
+use Image;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use phpDocumentor\Reflection\Types\Integer;
 
 class ItemController extends Controller
@@ -16,18 +18,50 @@ class ItemController extends Controller
         return view('items.new', compact($user));
     }
 
-    public function store ()
+    public function store (\Illuminate\Http\Request $request)
     {
         $user = Auth::user();
         $owner = $user['email'];
 
         $data = $_POST;
-        Item::create([
-            'name' => $data['ItemName'],
-            'owner' => $owner,
-            'description' => $data['Description'],
-            'available' => 'true',
-        ]);
+        //$file = $_FILES;
+
+        //$avatar = request()->file('avatar');
+        //$filename = time() . '.' . $avatar->getClientOriginalExtension();
+
+        $name = $data['ItemName'];
+        $description = $data['Description'];
+        $available = 'TRUE';
+
+
+        if($request->hasFile('avatar')){//array_key_exists ('avatar', $data ) && $data['avatar'] != '') {
+            $avatar = request()->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/items/' . $filename ) );
+
+            $sql = "insert into items (description, available, name, owner, avatar) values ('".$description."', '"
+                   .$available."', '".$name."', '".$owner."', '".$filename."');";
+            //print($sql);
+            //return 1;
+        }
+        else {
+            $sql = "insert into items (description, available, name, owner) values ('".$description."', '"
+                .$available."', '".$name."', '".$owner."');";
+            //print($sql);
+            //return 1;
+        }
+        //$avatar = $request->file('avatar');
+
+        //print($request);
+
+        $db = new mysqli('localhost', 'root', 'admin', 'blog');
+        if($db->connect_errno > 0){
+            die('Unable to connect to database [' . $db->connect_error . ']');
+        }
+
+        $db->query($sql);
+
+
         $userid = $user['id'];
         return redirect('users/'.$userid);
     }
