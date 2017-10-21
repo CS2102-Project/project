@@ -147,5 +147,11 @@ class UserController extends Controller
       return view('users.transactions',compact('userId'));
   }
 
+  public function showStatistics ($userId)
+  {
+      return view('users.statistics', compact('userId'));
+  }
+
+
 }
 
