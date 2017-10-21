@@ -16,15 +16,26 @@ class ItemController extends Controller
         return view('items.new', compact($user));
     }
 
-    public function store ()
+    public function store (\Illuminate\Http\Request $request)
     {
         $user = Auth::user();
         $owner = $user['email'];
 
         $data = $_POST;
+
+        print_r($data);
+
+        //print($request);
+        if ($request->hasFile('avatar')){
+            print("HAHAHA");
+            $data['avatar'];
+        }
+
+        return 1;
         Item::create([
             'name' => $data['ItemName'],
             'owner' => $owner,
+            'avatar' => $data['avatar'],
             'description' => $data['Description'],
             'available' => 'true',
         ]);
