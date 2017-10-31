@@ -26,6 +26,11 @@
  	bottom=38mm
 }
 
+\usepackage{array}
+\usepackage{booktabs}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
 % for introducing urls
 \usepackage{url}
 
@@ -88,8 +93,95 @@ throughout the course of this project.
 \section{Database Design}
 
 \subsection{Entity-Relationship Diagram}
+\newpage
 
 \subsection{Entities}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\multicolumn{2}{c}{Users}\\[2mm]
+\hline
+Attribute & Domain\\
+\hline
+email & VARCHAR(64)\\
+username & VARCHAR(64) \\
+password & VARCHAR(64) \\
+mobile & INT(8) \\
+address & VARCHAR(128) \\
+points\_available & INT(3) \\
+credit\_rating & NUMERIC \\
+created\_at & TIMESTAMP \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\multicolumn{2}{c}{Items}\\[2mm]
+\hline
+Attribute & Domain\\
+\hline
+name & VARCHAR(64)\\
+avatar & VARCHAR(256) \\
+owner & VARCHAR(64) \\
+description & TEXT \\
+available & VARCHAR(5)\\
+created\_at & TIMESTAMP \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\multicolumn{2}{c}{Posts}\\[2mm]
+\hline
+Attribute & Domain\\
+\hline
+item & VARCHAR(64)\\
+title & VARCHAR(64) \\
+location & VARCHAR(128) \\
+description & TEXT \\
+start & TIMESTAMP \\
+end & TIMESTAMP \\
+created\_at & TIMESTAMP \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\multicolumn{2}{c}{Bids}\\[2mm]
+\hline
+Attribute & Domain\\
+\hline
+bidder & VARCHAR(64)\\
+post & VARCHAR(64) \\
+status & CHAR(7) \\
+points & INT(3) \\
+created\_at & TIMESTAMP \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\multicolumn{2}{c}{Loans}\\[2mm]
+\hline
+Attribute & Domain\\
+\hline
+bid & VARCHAR(64)\\
+post & VARCHAR(64) \\
+start & TIMESTAMP \\
+end & TIMESTAMP \\
+comments & TEXT \\
+status & VARCHAR(8) \\
+created\_at & TIMESTAMP \\
+\hline
+\end{tabular}
+\end{center}
+
 
 \subsection{Relational Schema}
 
