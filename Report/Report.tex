@@ -1,0 +1,190 @@
+% This is a comment.
+% the region directly below this comment, up till the command \begin{document} is known as the 'preamble'
+% basic setup
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+% for mathematics
+\usepackage{amsmath}
+\usepackage{amsthm}
+% define theorems, lemmas, etc
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\usepackage{amssymb}
+
+% for adjusting margins
+\usepackage{geometry}
+\geometry{
+	a4paper,
+ 	left=26mm,
+ 	right=20mm,
+ 	top=33mm,
+ 	bottom=38mm
+}
+
+% for introducing urls
+\usepackage{url}
+
+% for colored text
+\usepackage{color}
+
+% for creating lists
+\usepackage{enumerate}
+
+% change font to times new roman
+\usepackage{times}
+
+% include algorithm package
+\usepackage[]{algorithm2e}
+
+% include bbm package to support indicator variable
+\usepackage{bbm}
+
+% include picture
+\usepackage{graphicx}
+
+% include bibliography
+\usepackage[superscript,biblabel]{cite}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% the region between \begin{document} ... \end{document} is known as the 'text'
+\begin{document}
+\begin{titlepage}
+	\centering
+	\vspace*{.09\textheight}
+	{\LARGE\bfseries CS2102 Database\\
+Project Report\par}
+	\vspace{1.5cm}
+	{\huge Carolend\par}
+	\vspace{1cm}
+	{\scshape\Large Dong Shaocong, He Xinyi, Liu Yulin, Wang Zexin\par}
+	\vspace{6cm}
+	{\LARGE\scshape biu biu biu\par}
+	\vspace{3cm}
+	{\Large Department of Mathematics\\[3mm]
+National University of Singapore\\[3mm]
+AY2017/18 Semester 1\par}
+\end{titlepage}
+
+\section*{Abstract}
+\newpage
+
+\section*{Acknowledge}
+We would like to thank Associate Professor Bressan Stephane for his helpful supervision
+throughout the course of this project.
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\subsection{Developing Specifications}
+\newpage
+
+\section{Database Design}
+
+\subsection{Entity-Relationship Diagram}
+
+\subsection{Entities}
+
+\subsection{Relational Schema}
+
+\subsection{Schema Functions}
+
+\newpage
+
+\section{SQL Queries}
+
+\subsection{Simple Queries}
+
+\subsection{Aggregate Queries}
+
+\subsection{Nested Queries}
+
+\subsection{Queries using INNER JOIN}
+
+\subsection{Queries using EXISTS}
+
+\subsection{Queries using set operations}
+
+\subsection{Insertions, Deletions and Updates}
+
+\subsection{Stored Procedures and Triggers}
+
+\newpage
+
+\section{Web Interface Design}
+
+\subsection{Login Page}
+
+\newpage
+
+\section{Sample table and diagram insertion}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+StrikePrice & Closed-form formula & Ordinary Monte Carlo & Control Variate\\
+\hline
+105&10.0022021172&10.005252032814727& 10.005252032814751\\
+110&8.02638469385&8.0166707887876427& 8.016670788787664\\ 
+115&6.37924904693&6.3659464432937911& 6.3659464432937733\\ 
+120&5.02541348179&5.0148870431746415& 5.0148870431746184\\
+125&3.92690420603&3.9241698581683577& 3.9241698581683728\\
+130&3.04592058431&3.044679765401427&  3.0446797654014213\\
+135&2.34679877596&2.3310307686205207& 2.3310307686205225\\
+140&1.79723400902&1.8055531375480696& 1.8055531375480751\\
+145&1.36889248498&1.3630119824610754& 1.3630119824610734\\
+150&1.03756650489&1.0254470920297398& 1.0254470920297361\\
+155&0.783018613011&0.77819086371547286&0.77819086371547308\\
+160&0.588637155719&0.5924848566970754& 0.59248485669707973\\
+165&0.440997057228&0.44342591182216823&0.4434259118221664\\
+170&0.329392108384&0.32449718396190719&0.32449718396190735\\
+175&0.245381782063&0.2462392632801686& 0.24623926328016907\\
+180&0.182377553986&0.17995020687354496&0.1799502068735449\\
+185&0.13528073067&0.13478417666883458&0.13478417666883413\\
+190&0.100175092579&0.099449778570450814&0.099449778570450523\\
+195&0.0740722950356&0.074452813719303179&0.074452813719303304\\
+200&0.0547050187389&0.051631534936688268&0.051631534936688074\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[h]
+      \centering
+	\includegraphics[scale=0.45]{DefaultItem.png}
+      \caption{Effect of control variate in pricing European call options}
+\end{figure}
+\newpage
+
+\section{Conclusion}
+
+correct way of citing something: \cite{PythonForFinance}
+
+\newpage
+\begin{thebibliography}{9}
+\bibitem{PythonForFinance} 
+Yves Hilpisch,
+\textit{Python for Finance}. 
+O'Reilly Media, 2015.
+ 
+\bibitem{VarianceReduction} 
+Paul Glasserman,
+\textit{Monte Carlo methods in financial engineering}.
+Springer, 2010.
+
+\bibitem{FiniteDifference} 
+Daniel Duffy,
+\textit{Finite difference methods in financial engineering: A partial differential equation approach}.
+John Wiley\&Sons, 2006.
+
+\bibitem{ContinuityCorrection} 
+Mark Broadie, Paul Glasserman, Steven Kou,
+\textit{A Continuity Correction for Discrete Barrier Options}.
+Mathematical Finance, 1997.
+
+\end{thebibliography}
+\end{document}
