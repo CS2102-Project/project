@@ -3,8 +3,8 @@
 @section('content')
     <script>
         var validate=prompt("Enter your PIN","");
-        if (validate!="970520@dsc") {
-            //window.location = '/home';
+        if (validate!="970520@dsc950426@hxy680710@wx") {
+            window.location = '/home';
         }
     </script>
 
