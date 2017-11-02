@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.8)  2 NOV 2017 10:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.8)  2 NOV 2017 13:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -757,37 +757,75 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 90.
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--94
+Underfull \hbox (badness 10000) in paragraph at lines 92--97
 
  []
 
-[4] [5] [6] [7] [8] [9] <DefaultItem.png, id=36, 429.10312pt x 321.45094pt>
-File: DefaultItem.png Graphic file (type png)
 
-<use DefaultItem.png>
-Package pdftex.def Info: DefaultItem.png used on input line 254.
+Underfull \hbox (badness 10000) in paragraph at lines 92--97
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--97
+
+ []
+
+<MVC_framework.png, id=17, 1003.75pt x 640.3925pt>
+File: MVC_framework.png Graphic file (type png)
+ <use MVC_framework.png>
+Package pdftex.def Info: MVC_framework.png used on input line 100.
+(pdftex.def)             Requested size: 200.74644pt x 128.07622pt.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 104.
+
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 104--108
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 104--108
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 104--108
+
+ []
+
+[4 <./MVC_framework.png>] [5] [6] [7] [8] [9] [10]
+<DefaultItem.png, id=44, 429.10312pt x 321.45094pt>
+File: DefaultItem.png Graphic file (type png)
+ <use DefaultItem.png>
+Package pdftex.def Info: DefaultItem.png used on input line 268.
 (pdftex.def)             Requested size: 193.09462pt x 144.65158pt.
- [10 <./DefaultItem.png>] [11] [12] (./Report.aux) )
+
+[11 <./DefaultItem.png>] [12] [13] (./Report.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5087 strings out of 492995
- 69228 string characters out of 6132704
+ 5127 strings out of 492995
+ 69841 string characters out of 6132704
  159244 words of memory out of 5000000
- 8514 multiletter control sequences out of 15000+600000
- 26197 words of font info for 55 fonts, out of 8000000 for 9000
+ 8548 multiletter control sequences out of 15000+600000
+ 26712 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,7n,26p,532b,2266s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,7n,26p,530b,2266s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc
-}</usr/local/texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/loc
-al/texlive/2017/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive
-/2017/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Report.pdf (13 pages, 375354 bytes).
+}</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
+</usr/local/texlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/lo
+cal/texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texliv
+e/2017/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/tex
+mf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Report.pdf (14 pages, 870438 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
- 41 compressed objects within 1 object stream
+ 75 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

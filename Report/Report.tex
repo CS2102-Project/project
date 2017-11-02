@@ -86,11 +86,25 @@ throughout the course of this project.
 \newpage
 
 \section{Introduction}
-
+In this project, we are required to build a stuff sharing website. the system allows people to borrow or lend stuff that they own (tools, appliances, furniture or books) either free or for a fee. Users advertise stuff available (what stuff, where to pick up and return, when it is available, etc.) or can browse the available stuff and bid to borrow some stuff. The stuff owner or the system (your choice) chooses the successful bid. Each user has an account. Administrators can create, modify and delete all entries.
 \subsection{Developing Specifications}
-In this project, we are required to build a stuff sharing website. the system allows people to borrow or lend stuff that they own (tools, appliances, furniture or books) either free or for a fee. Users advertise stuff available (what stuff, where to pick up and return, when it is available, etc.) or can browse the available stuff and bid to borrow some stuff. The stuff owner or the system (your choice) chooses the successful bid. Each user has an account. Administrators can create, modify and delete all entries.\\
+
+After seeing through the relevant products specifications and the website requirements, we decided to use $PHP$ as back end programming language, $Javascript$ as front end developing language, $MySQL$ as our database. We used $Laravel$, which is the most popular web application framework for $PHP$.\\
 \\
-After seeing through the relevant products
+From the project requirement, Eloquent ORM in built in Laravel to access and manipulate the database is not allowed. Therefore, anything related to database management, access, and manipulation is down by importing $PHP$ $mysqli$ library and execute raw $SQL$ queries.\\
+\\
+To develop this web application, we utilise the Model View Controller ($MVC$) framework.\\
+
+\begin{figure}[h]
+      \centering
+	\includegraphics[scale=0.2]{MVC_framework.png}
+      \caption{Model View Controller (MVC)}
+\end{figure}
+
+We use $CSS$ Scaffolding in Laravel to take care of the views. Buttons and redirections from the user side are implemented in $Javascript$. The models and controllers are written in $PHP$. The specific $MySQL$ database we used it $root$ user's database named $blog$. The website is still hosted on \url{localhost:8000} only.\\
+\\
+From our modelling for this problem, there are two types of users. The admin users will have different interfaces and unlimited access to all entries. From the user management button in the admin user's profile page. All the users information can be modified and deleted. New users can be added on this panel as well.\\
+\\
 
 \newpage
 
