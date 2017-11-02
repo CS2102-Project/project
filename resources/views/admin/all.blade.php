@@ -15,14 +15,15 @@
                     <div class="panel-heading">Admin Panel: You are logged in as administrator.</div>
 
                     <script>
-                        function updateUser(email, username, password, mobile, credit_rating) {
-                            var email=prompt("Updating email",email);
-                            var username=prompt("Updating username",username);
-                            var password=prompt("Updating password",password);
-                            var mobile=prompt("Updating mobile",mobile);
-                            var credit_rating=prompt("Updating credit_rating",credit_rating);
+                        function updateUser(userId){//email, username, password, mobile, credit_rating) {
+                            //var email=prompt("Updating email",email);
+                            //var username=prompt("Updating username",username);
+                            //var password=prompt("Updating password",password);
+                            //var mobile=prompt("Updating mobile",mobile);
+                            //var credit_rating=prompt("Updating credit_rating",credit_rating);
 
                             //window.location.href =
+                            window.location.href = 'admin/editUser/' + userId;
 
                         }
                         function deleteUser(userId) {
@@ -30,7 +31,7 @@
                         }
 
                         function newUser(userId) {
-
+                            window.location.href = 'admin/newUser';
                         }
 
                     </script>
@@ -69,7 +70,7 @@
                                 <div class='form-group'>
                                     <div class='col-md-8 col-md-offset-4'>
                                         <button type='submit' class='btn btn-primary'
-                                        onclick='updateUser(".$row['email'].", ".$row['username'].", ".$row['password'].", ".$row['mobile'].", ".$row['credit_rating'].")'>
+                                        onclick='updateUser(".$current_user_id.")'>
                                         Update
                                         </button>
                                         <button type='submit' class='btn btn-primary' onclick='deleteUser(".$current_user_id.")'>

@@ -21,4 +21,8 @@ class AdminController
         $db->query($sql);
         return view('admin.all');
     }
+
+    function newUser () {
+        return view('admin.newUser');
+    }
 }
