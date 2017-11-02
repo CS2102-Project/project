@@ -52,3 +52,6 @@ Route::post('bids/{id}/edit', 'BidController@editSubmit')->name('bids.editSubmit
 Route::get('/users/{id}/transactions', 'UserController@transactionsDisplay')->name('users.transactionDisplay');
 
 Route::get('/loans/{id}/return', 'LoanController@returnLoan')->name('loans.returnLoan');
+
+Route::get('/admin', 'AdminController@direct')->name('admin.direct');
+Route::get('/admin/deleteUser/{id}', 'AdminController@deleteUser')->name('admin.deleteUser');
