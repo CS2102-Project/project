@@ -16,11 +16,19 @@
 
                     <?php
                         $user = \Illuminate\Support\Facades\Auth::user();
+                        $admin = $user['admin'];
                         $points_available = $user['points_available'];
+                        if ($admin ==1 ) {
+                            echo "<h5>You are logged in as admin!</h5>";
+                        }
+                        else {
+                            echo "<h5>You are logged in as ". $username."!</h5>";
+                            echo "<h5>You have ".$points_available." points available.</h5>";
+                        }
                     ?>
 
-                    <h5>You are logged in as {{$username}}!</h5>
-                    <h5>You have {{$points_available}} points available.</h5>
+
+
 
                             <script>
                                 //alert("You are logged in.");
@@ -75,7 +83,11 @@
                             if($db->connect_errno > 0){
                                 die('Unable to connect to database [' . $db->connect_error . ']');
                             }
-                            $sql = "select * from items i where i.owner = '".$email."';";
+                            if ($admin == 1) {
+                                $sql = "select * from items i";
+                            } else {
+                                $sql = "select * from items i where i.owner = '".$email."';";
+                            }
                             $items_owned = $db->query($sql);
                             $index = 1;
 
@@ -119,9 +131,11 @@
                     <div class="panel-body">
 
                         <?php
-
-                            $sql = "select p.title, p.location, p.created_at, p.postid, p.description, i.name, i.avatar from posts p, items i where p.item = i.itemid AND i.owner = '".
-							$email."';";
+                            if ($admin == 1) {
+                                $sql = "select p.title, p.location, p.created_at, p.postid, p.description, i.name, i.avatar from posts p, items i where p.item = i.itemid;";
+                            } else {
+                                $sql = "select p.title, p.location, p.created_at, p.postid, p.description, i.name, i.avatar from posts p, items i where p.item = i.itemid AND i.owner = '".$email."';";
+                            }
                             $posts = $db->query($sql);
                             $index = 1;
 
@@ -168,9 +182,16 @@
 
                     <div class="panel-body">
                         <?php
-
-                        $sql = "select b.post, b.points, b.updated_at, b.status, b.bidid, i.avatar, p.title, p.postid from bids b, posts p, items i where
+                            if ($admin == 1) {
+                                $sql = "select b.post, b.points, b.updated_at, b.status, b.bidid, i.avatar, p.title, p.postid from bids b, posts p, items i where
+                                b.post = p.postid and p.item = i.itemid;";
+                            }
+                            else {
+                                $sql = "select b.post, b.points, b.updated_at, b.status, b.bidid, i.avatar, p.title, p.postid from bids b, posts p, items i where
                                 b.post = p.postid and p.item = i.itemid and b.bidder = '". $email."';";
+
+                            }
+
                         $posts = $db->query($sql);
                         $index = 1;
 
@@ -228,8 +249,13 @@
                     <div class="panel-body">
 
                         <?php
+                            if ($admin == 1) {
+                                $sql = "select p.title, p.description, l.start, l.loanid from loans l, bids b, posts p where p.postid = b.post and l.bid = b.bidid and l.status = 'USING';";
+                            }
+                            else {
                             $sql = "select p.title, p.description, l.start, l.loanid from loans l, bids b, posts p where p.postid = b.post and l.bid = b.bidid and b.bidder = '".
                                 $email."' and l.status = 'USING';";
+                            }
                             $results = $db->query($sql);
                             $index = 1;
 
