@@ -28,6 +28,7 @@
                         @endif
                         <h5>You are logged in as {{$username}}!</h5>
                         <h5>You have {{$points_available}} points available.</h5>
+                            <h5> If you are admin, please ignore your statistics.</h5>
                         <hr>
 
                     </div>

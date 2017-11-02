@@ -1,10 +1,40 @@
---For markets display, select posts that don't belong to the current user
-SELECT * from posts p where p.item not in (
-  SELECT i.itemid from items i where i.owner = user_email
-);
+-----Our queries for this application
 
---Insert new entries into bids table
+--Insertions
 INSERT INTO bids (bidder, post, points) VALUES (email, postid, points);
+INSERT INTO loans (bid, post, status) values($bidId, postid, using_status);
+INSERT INTO items (description, available, name, owner, avatar) values (description,
+                   available, name, owner, filename);
+INSERT INTO posts (item, title, location, description) VALUES (itemId, title, location, description);
+INSERT INTO bids (status, bidder, post, points) VALUES ('FAILURE', email, postid, point);
+
+
+--Other simpler operation's queries
+SELECT * FROM bids WHERE bids.bidid = bidid; --for edit bid
+SELECT * FROM item i; --for display items
+SELECT * FROM posts WHERE posts.postid = postid; --for edit post
+SELECT * FROM users WHERE users.id = userid; --for getting the current user's full information
+DELETE FROM bids WHERE bids.bidid = bidid; --for bids deletion
+DELETE from posts where posts.postid = postid; --for posts deletion
+UPDATE bids set bids.points = points_updated where bids.bidid = bidid; --for bidding point update logic
+UPDATE bids set bids.status = 'SUCCESS' where bids.bidid = bidid; --for bidding status update logic
+UPDATE users set users.points_available = users.points_available + points where users.id = userid; --for bidding points update logic
+UPDATE loans l set l.status = 'RETURNED' where l.loanid = loanid;
+UPDATE posts set posts.title = title, posts.location = location, posts.description = description where posts.postid = postid;
+
+
+--For market display without the user's posts
+SELECT p.postid, p.title, p.description, p.created_at, i1.avatar 
+FROM posts p, items i1 
+WHERE p.item NOT IN 
+    (SELECT i.itemid FROM items i WHERE i.owner =email)
+AND p.item = i1.itemid;
+
+--For selecting the posts that the current user owns, and are currently being bid by other users.
+SELECT * FROM posts p, items i 
+WHERE p.item=i.itemid AND i.owner = email;
+
+
 
 --Transaction history
 SELECT u1.username as owner, u2.username as bidder, b.points, b.updated_at as time
@@ -34,15 +64,12 @@ SELECT MAX(b.points)
 FROM bids b, posts p
 WHERE b.post = p.postid AND p.postid = postid;
 
-
--- By Wang Zexin:
-
 -- This query should be run only once
-CREATE VIEW item_popularity AS
-SELECT i.itemid as itemid, i.owner as owner, COUNT(*) AS popularity
-FROM items i, posts p, bids b
-WHERE i.itemid = p.item AND p.postid = b.post
-GROUP BY i.itemid, i.owner;
+--CREATE VIEW item_popularity AS
+--SELECT i.itemid as itemid, i.owner as owner, COUNT(*) AS popularity
+--FROM items i, posts p, bids b
+--WHERE i.itemid = p.item AND p.postid = b.post
+--GROUP BY i.itemid, i.owner;
 
 SELECT itemid, AVERAGE(popularity)
 FROM item_popularity;

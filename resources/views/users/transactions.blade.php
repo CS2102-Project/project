@@ -18,11 +18,19 @@
                         $username = $user['username'];
                         $userid = $user['id'];
                         $email = $user['email'];
+                        $admin = $user['admin'];
                         $points_available = $user['points_available'];
+
+                            if ($admin ==1 ) {
+                                echo "<h5>You are logged in as admin!</h5>";
+                            }
+                            else {
+                                echo "<h5>You are logged in as ". $username."!</h5>";
+                                echo "<h5>You have ".$points_available." points available.</h5>";
+                            }
                     ?>
 
-                    <h5>You are logged in as {{$username}}!</h5>
-                    <h5>You have {{$points_available}} points available.</h5>
+
 
                     <script>
 
@@ -52,7 +60,11 @@
                         if($db->connect_errno > 0){
                             die('Unable to connect to database [' . $db->connect_error . ']');
                         }
-                        $sql = "SELECT * from posts p, items i where p.item=i.itemid and i.owner = '".$email."';";
+                        if ($admin == 0) {
+                        $sql = "SELECT * from posts p, items i where p.item=i.itemid and i.owner = '".$email."';";}
+                        else {
+                            $sql = "SELECT * from posts p, items i where p.item=i.itemid;";
+                        }
 
                         $posts_owned = $db->query($sql);
                         $index = 1;
@@ -125,9 +137,15 @@
                         //AND (b.bidder = '".$email."' OR i.owner = '".$email."') AND b.status = 'SUCCESS'
                         //ORDER BY time desc;";
                         //print($sql);
+
                         $sql = "SELECT u.username as bidder, p.title as title, b.points as points, l.created_at as time from users u, bids b, loans l, posts p, items i
                                 WHERE u.email = b.bidder and b.bidid = l.bid and l.post = p.postid and p.item = i.itemid
                                 and i.owner = '".$email."' and l.status = 'USING';";
+                        if ($admin == 1) {
+                            $sql = "SELECT u.username as bidder, p.title as title, b.points as points, l.created_at as time from users u, bids b, loans l, posts p, items i
+                                WHERE u.email = b.bidder and b.bidid = l.bid and l.post = p.postid and p.item = i.itemid
+                                and l.status = 'USING';";
+                        }
                         //print($sql);
                         $index  = 1;
                         $related_history = $db -> query($sql);
@@ -170,6 +188,14 @@
                         WHERE b.bidder = u2.email AND b.post = p.postid AND p.item = i.itemid AND i.owner = u1.email
                         AND (b.bidder = '".$email."' OR i.owner = '".$email."') AND b.status = 'SUCCESS' AND l.bid = b.bidid
                         AND l.status = 'RETURNED' ORDER BY time desc;";
+
+                        if ($admin == 1) {
+                            $sql = "SELECT u1.username as owner, u2.username as bidder, b.points, b.updated_at as time
+                        FROM users u1, users u2, bids b, items i, posts p, loans l
+                        WHERE b.bidder = u2.email AND b.post = p.postid AND p.item = i.itemid AND i.owner = u1.email
+                        AND b.status = 'SUCCESS' AND l.bid = b.bidid
+                        AND l.status = 'RETURNED' ORDER BY time desc;";
+                        }
                         //print($sql);
                             $index  = 1;
 

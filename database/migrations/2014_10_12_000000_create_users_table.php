@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('remember_token', 100)->default("DSC970520");
+            $table->integer('admin')->default(0);
         });
     }
 

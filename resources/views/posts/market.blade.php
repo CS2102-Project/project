@@ -10,7 +10,19 @@
                     <?php
                         $username = $user['username'];
                         $email = $user['email'];
+                        $admin = $user['admin'];
                         $points_available = $user['points_available'];
+                    echo "<div class='panel-body'>";
+                    if ($admin ==1 ) {
+                        echo "<h5>You are logged in as admin!</h5>";
+                    }
+                    else {
+
+                        echo "<h5>You are logged in as ". $username."!</h5>";
+                        echo "<h5>You have ".$points_available." points available.</h5>";
+
+                    }
+                    echo "</div>";
 
                     ?>
                     <div class="panel-body">
@@ -19,8 +31,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <h5>You are logged in as {{$username}}!</h5>
-                        <h5>You have {{$points_available}} points available.</h5>
+
                         <hr>
 
                     </div>
@@ -40,8 +51,12 @@
                         if($db->connect_errno > 0){
                             die('Unable to connect to database [' . $db->connect_error . ']');
                         }
+                        if ($admin == 0) {
                         $sql = "SELECT p.postid, p.title, p.description, p.created_at, i1.avatar from posts p, items i1 where p.item not in ( SELECT i.itemid from items i where i.owner ='".$email."')
-                                and p.item = i1.itemid;";
+                                and p.item = i1.itemid;";}
+                                else {
+                                    $sql = "SELECT p.postid, p.title, p.description, p.created_at, i1.avatar from posts p, items i1 where p.item = i1.itemid;";
+                                }
                         $all_posts_not_owned = $db->query($sql);
                         $index = 1;
 
