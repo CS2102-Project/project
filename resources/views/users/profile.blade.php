@@ -14,18 +14,34 @@
                             </div>
                         @endif
 
+                    <script>
+                        function adminUserManagement() {
+                            window.location = '../admin';
+                        }
+                    </script>
+
                     <?php
                         $user = \Illuminate\Support\Facades\Auth::user();
                         $admin = $user['admin'];
                         $points_available = $user['points_available'];
                         if ($admin ==1 ) {
                             echo "<h5>You are logged in as admin!</h5>";
+
+                            echo "
+                                <div class='form-group'>
+                                    <div class='col-md-8 col-md-offset-4'>
+                                        <button type='submit' class='btn btn-primary' onclick='adminUserManagement()'>
+                                        User Management
+                                        </button>
+                                    </div>
+                                </div>";
                         }
                         else {
                             echo "<h5>You are logged in as ". $username."!</h5>";
                             echo "<h5>You have ".$points_available." points available.</h5>";
                         }
                     ?>
+                            <hr>
 
 
 
