@@ -12,6 +12,17 @@
                         $email = $user['email'];
                         $admin = $user['admin'];
                         $points_available = $user['points_available'];
+                    echo "<div class='panel-body'>";
+                    if ($admin ==1 ) {
+                        echo "<h5>You are logged in as admin!</h5>";
+                    }
+                    else {
+
+                        echo "<h5>You are logged in as ". $username."!</h5>";
+                        echo "<h5>You have ".$points_available." points available.</h5>";
+
+                    }
+                    echo "</div>";
 
                     ?>
                     <div class="panel-body">
@@ -20,8 +31,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <h5>You are logged in as {{$username}}!</h5>
-                        <h5>You have {{$points_available}} points available.</h5>
+
                         <hr>
 
                     </div>
