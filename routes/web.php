@@ -56,3 +56,5 @@ Route::get('/loans/{id}/return', 'LoanController@returnLoan')->name('loans.retur
 Route::get('/admin', 'AdminController@direct')->name('admin.direct');
 Route::get('/admin/deleteUser/{id}', 'AdminController@deleteUser')->name('admin.deleteUser');
 Route::get('/admin/newUser', 'AdminController@newUser')->name('admin.newUser');
+Route::get('/admin/editUser/{id}', 'AdminController@editUser')->name('admin.editUser');
+Route::post('/admin/editUser/{id}', 'AdminController@editUserSubmit')->name('admin.editUserSubmit');

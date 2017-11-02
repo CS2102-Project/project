@@ -4,7 +4,7 @@
     <script>
         var validate=prompt("Enter your PIN","");
         if (validate!="970520@dsc") {
-            window.location = '/home';
+            //window.location = '/home';
         }
     </script>
 
@@ -23,15 +23,15 @@
                             //var credit_rating=prompt("Updating credit_rating",credit_rating);
 
                             //window.location.href =
-                            window.location.href = 'admin/editUser/' + userId;
+                            window.location.href = '../admin/editUser/' + userId;
 
                         }
                         function deleteUser(userId) {
-                            window.location.href = 'admin/deleteUser/' + userId;
+                            window.location.href = '../admin/deleteUser/' + userId;
                         }
 
                         function newUser(userId) {
-                            window.location.href = 'admin/newUser';
+                            window.location.href = '../admin/newUser';
                         }
 
                     </script>
