@@ -16,6 +16,9 @@
 \contentsline {subsection}{\numberline {3.7}Insertions, Deletions and Updates}{9}
 \contentsline {subsection}{\numberline {3.8}Stored Procedures and Triggers}{9}
 \contentsline {section}{\numberline {4}Web Interface Design}{10}
-\contentsline {subsection}{\numberline {4.1}Login Page}{10}
-\contentsline {section}{\numberline {5}Sample table and diagram insertion}{11}
-\contentsline {section}{\numberline {6}Conclusion}{12}
+\contentsline {subsection}{\numberline {4.1}Sign Up Page}{10}
+\contentsline {subsection}{\numberline {4.2}Log In Page}{10}
+\contentsline {subsection}{\numberline {4.3}Application}{11}
+\contentsline {subsection}{\numberline {4.4}Administration}{11}
+\contentsline {section}{\numberline {5}Sample table and diagram insertion}{12}
+\contentsline {section}{\numberline {6}Conclusion}{13}

@@ -228,8 +228,41 @@ created\_at & TIMESTAMP \\
 \newpage
 
 \section{Web Interface Design}
+We aims to have a friendly, easy-to-use interface for our web application. The following sections are about the pages in our web interface.
+\subsection{Sign Up Page}
+\begin{figure}[h]
+      \centering
+	\includegraphics[scale=0.5]{register.png}
+      \caption{New User registration page}
+\end{figure}
+From this page, new users will be able to sign up and enter our system.
 
-\subsection{Login Page}
+\subsection{Log In Page}
+Other users will be able to log in via this page.
+\begin{figure}[h]
+      \centering
+	\includegraphics[scale=0.5]{login.png}
+      \caption{User login page}
+\end{figure}
+\newpage
+
+\subsection{Application}
+Upon logging in, the user will be directed to his dashboard. He can easily see the points available for him or her. Besides that, the items the user owning, the posts he or she has submitted, the posts the user is currently bidding and the items the user is currently borrowing will be displayed sequentially thought this the page.\\
+\begin{figure}[h]
+      \centering
+	\includegraphics[scale=0.3]{dashboard.png}
+      \caption{User login page}
+\end{figure}
+In addition, from the top right drop down list, the user can go to other pages ranging form his or her using statistics. User can also create new item, go to the posting markets and checkout current transactions and transacting history. This includes the user's posts that are being bid by other users, the user's current lending items and the past transactions.
+
+\subsection{Administration}
+There is a special type of user called admin user. They have their admin column equal to 1 and the can have unlimited access to access, delete, update and create any entries in our database. Users are not able to sign up an admin account. The only possible way to become an admin is to update the table in our database directly. Implemented in this way, the administration page is very secure and the current normal users' information are properly protected.
+\begin{figure}[h]
+      \centering
+	\includegraphics[scale=0.3]{admin.png}
+      \caption{User login page}
+\end{figure}
+As shown in this screen shot, the admin user can access any entries inside this application. If he or she wants to manage the current users, they can do so by clicking the user management button and the user records can be updated, deleted or created on our administration user management panel.
 
 \newpage
 

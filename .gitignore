@@ -12,10 +12,10 @@ npm-debug.log
 yarn-error.log
 .env
 
-Report/Report.aux
-Report/Report.log
-Report/Report.synctex.gz
-Report/Report.toc
+/Report/Report.aux
+/Report/Report.log
+/Report/Report.synctex.gz
+/Report/Report.toc
 
 *.aux
 *.log

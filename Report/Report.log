@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.8)  2 NOV 2017 13:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.8)  2 NOV 2017 14:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -796,36 +796,61 @@ Underfull \hbox (badness 10000) in paragraph at lines 104--108
 
  []
 
-[4 <./MVC_framework.png>] [5] [6] [7] [8] [9] [10]
-<DefaultItem.png, id=44, 429.10312pt x 321.45094pt>
+[4 <./MVC_framework.png>] [5] [6] [7] [8] [9]
+<register.png, id=41, 674.52pt x 472.76625pt>
+File: register.png Graphic file (type png)
+ <use register.png>
+Package pdftex.def Info: register.png used on input line 235.
+(pdftex.def)             Requested size: 337.25917pt x 236.38254pt.
+
+<login.png, id=42, 645.41125pt x 255.95625pt>
+File: login.png Graphic file (type png)
+ <use login.png>
+Package pdftex.def Info: login.png used on input line 244.
+(pdftex.def)             Requested size: 322.70483pt x 127.9778pt.
+ [10 <./register.png> <./login.png>] <dashboard.png, id=48, 1019.81pt x 578.16p
+t>
+File: dashboard.png Graphic file (type png)
+
+<use dashboard.png>
+Package pdftex.def Info: dashboard.png used on input line 253.
+(pdftex.def)             Requested size: 305.94536pt x 173.44933pt.
+ <admin.png, id=49, 649.42625pt x 216.81pt>
+File: admin.png Graphic file (type png)
+ <use admin.png>
+Package pdftex.def Info: admin.png used on input line 262.
+(pdftex.def)             Requested size: 194.82938pt x 65.04349pt.
+
+[11 <./dashboard.png> <./admin.png>]
+<DefaultItem.png, id=55, 429.10312pt x 321.45094pt>
 File: DefaultItem.png Graphic file (type png)
  <use DefaultItem.png>
-Package pdftex.def Info: DefaultItem.png used on input line 268.
+Package pdftex.def Info: DefaultItem.png used on input line 301.
 (pdftex.def)             Requested size: 193.09462pt x 144.65158pt.
 
-[11 <./DefaultItem.png>] [12] [13] (./Report.aux) )
+[12 <./DefaultItem.png>] [13] [14] (./Report.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5127 strings out of 492995
- 69841 string characters out of 6132704
+ 5147 strings out of 492995
+ 70132 string characters out of 6132704
  159244 words of memory out of 5000000
- 8548 multiletter control sequences out of 15000+600000
+ 8564 multiletter control sequences out of 15000+600000
  26712 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,7n,26p,530b,2266s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,8n,26p,530b,2270s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc
 }</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
 </usr/local/texlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/lo
 cal/texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texliv
 e/2017/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/tex
 mf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Report.pdf (14 pages, 870438 bytes).
+Output written on Report.pdf (15 pages, 942481 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
- 50 compressed objects within 1 object stream
+ 86 PDF objects out of 1000 (max. 8388607)
+ 52 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
