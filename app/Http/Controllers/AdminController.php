@@ -19,7 +19,7 @@ class AdminController
 
         $sql = "Delete from users where users.id =".$userId.";";
         $db->query($sql);
-        return view('admin.all');
+        return redirect('admin');
     }
 
     function newUser () {
