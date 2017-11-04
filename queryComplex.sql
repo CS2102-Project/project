@@ -72,9 +72,6 @@ WHERE b.post = p.postid AND p.postid = postid;
 --WHERE i.itemid = p.item AND p.postid = b.post
 --GROUP BY i.itemid, i.owner;
 
-SELECT itemid, AVERAGE(popularity)
-FROM item_popularity;
-
 SELECT u.email, AVERAGE(i.popularity)
 FROM users u, item_popularity i
 WHERE u.email = i.owner
