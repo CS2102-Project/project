@@ -116,8 +116,8 @@ From our modelling for this problem, there are two types of users. The admin use
 \subsection{Entities}
 
 \begin{center}
+Users: \quad
 \begin{tabular}{|c|c|}
-\multicolumn{2}{c}{Users}\\[2mm]
 \hline
 Attribute & Domain\\
 \hline
@@ -134,11 +134,9 @@ created\_at & TIMESTAMP \\
 \end{tabular}
 \end{center}
 
-
-
 \begin{center}
+Items: \quad
 \begin{tabular}{|c|c|}
-\multicolumn{2}{c}{Items}\\[2mm]
 \hline
 Attribute & Domain\\
 \hline
@@ -153,8 +151,8 @@ created\_at & TIMESTAMP \\
 \end{center}
 
 \begin{center}
+Posts: \quad
 \begin{tabular}{|c|c|}
-\multicolumn{2}{c}{Posts}\\[2mm]
 \hline
 Attribute & Domain\\
 \hline
@@ -170,8 +168,8 @@ created\_at & TIMESTAMP \\
 \end{center}
 
 \begin{center}
+Bids: \quad
 \begin{tabular}{|c|c|}
-\multicolumn{2}{c}{Bids}\\[2mm]
 \hline
 Attribute & Domain\\
 \hline
@@ -185,8 +183,8 @@ created\_at & TIMESTAMP \\
 \end{center}
 
 \begin{center}
+Loans: \quad
 \begin{tabular}{|c|c|}
-\multicolumn{2}{c}{Loans}\\[2mm]
 \hline
 Attribute & Domain\\
 \hline
@@ -201,8 +199,57 @@ created\_at & TIMESTAMP \\
 \end{tabular}
 \end{center}
 
-
 \subsection{Relational Schema}
+CREATE TABLE users (\\
+email VARCHAR(64) PRIMARY KEY,\\
+username VARCHAR(64) NOT NULL,\\
+password VARCHAR(64) NOT NULL,\\
+mobile INT NOT NULL,\\
+address VARCHAR(128), \\
+points\_available INT DEFAULT 500,\\
+admin INT DEFAULT 0,\\
+credit\_rating NUMERIC CHECK (credit $>=$ 0 AND credit $<=$ 5),\\
+created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP\\
+);\\\\
+CREATE TABLE items (\\
+itemid INT AUTO\_INCREMENT PRIMARY KEY,\\
+name VARCHAR(64) NOT NULL,\\
+avatar VARCHAR(256),\\
+owner VARCHAR(256) REFERENCES users(email) ON UPDATE CASCADE ON DELETE CASCADE,\\
+description TEXT,\\
+available VARCHAR(5) CHECK(available = `TRUE' OR available = `FALSE'),\\
+created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP\\
+);\\\\
+CREATE TABLE posts (\\
+postid int AUTO\_INCREMENT PRIMARY KEY,\\
+item int REFERENCES items(itemid) ON DELETE CASCADE,\\
+start TIMESTAMP NOT NULL DEFAULT CURRENT\_TIMESTAMP,\\
+end TIMESTAMP NOT NULL DEFAULT CURRENT\_TIMESTAMP, \\
+title VARCHAR(64) NOT NULL,\\
+location VARCHAR(128) NOT NULL,\\
+description TEXT,\\
+created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,\\
+CHECK (start $<$ end)\\
+);\\\\
+CREATE TABLE bids (\\
+bidid INT AUTO\_INCREMENT PRIMARY KEY,\\
+bidder INT REFERENCES users(email) ON UPDATE CASCADE ON DELETE CASCADE,\\
+post INT REFERENCES posts(postid) ON DELETE CASCADE,\\
+points INT NOT NULL,\\
+created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,\\
+status CHAR(7) CHECK (status = `SUCCESS' OR status = `FAILURE')\\
+);\\\\
+CREATE TABLE loans (\\
+loanid INT AUTO\_INCREMENT PRIMARY KEY,\\
+bid INT REFERENCES bids(bidid) ON DELETE CASCADE,\\
+post INT REFERENCES posts(postid) ON DELETE CASCADE,\\
+start TIMESTAMP NOT NULL DEFAULT CURRENT\_TIMESTAMP,\\
+end TIMESTAMP NOT NULL DEFAULT CURRENT\_TIMESTAMP,\\
+comments TEXT,\\
+created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,\\
+status VARCHAR(8) CHECK (status = `ONLOAN' or status = `RETURNED' or status = `EXPIRED'),\\
+CHECK (start $<$ end)\\
+);
 
 \subsection{Schema Functions}
 
@@ -212,7 +259,7 @@ created\_at & TIMESTAMP \\
 
 \subsection{Simple Queries}
 
-The following simple query returns all the information about one particular bidding made. This is displayed when the bidder wants to edit his own bidding.\\
+The following simple query returns all the information about one particular bidding specified by bidid. This is displayed when the bidder wants to edit his own bidding.\\
 \\
 SELECT * \\
 FROM bids\\
@@ -227,15 +274,30 @@ WHERE posts.postid = postid;\\\\
 The following simple query returns all the information about one user with userid specified. This is displayed when the user visited his `user' page.\\
 SELECT * \\
 FROM users \\
-WHERE users.id = userid;\\
+WHERE users.id = userid;\\\\
+The following simple query returns all the information about the posts of a particular user specified by his/her email.\\\\
+SELECT * \\
+FROM posts p, items i \\
+WHERE p.item = i.itemid AND i.owner = email;\\\\
+The following simple query returns all the information about the transaction history between two users, i.e. their usernames, bidding points, bidding time.\\\\
+SELECT u1.username as owner, u2.username as bidder, b.points, b.updated\_at as time\\
+FROM users u1, users u2, bids b, items i, posts p\\
+WHERE b.bidder = u2.email AND b.post = p.postid AND p.item = i.itemid AND i.owner = u1.email\\
+AND (b.bidder = email OR i.owner = email);
 
 \subsection{Aggregate Queries}
 The following aggregate query returns the maximum bidding points for one particular post with postid specified. This is displayed when the poster wants to check the maximum bid made for his post.\\\\
 SELECT MAX(b.points)\\
 FROM bids b, posts p\\
-WHERE b.post = p.postid AND p.postid = postid;\\
+WHERE b.post = p.postid AND p.postid = postid;
 
 \subsection{Nested Queries}
+The following nested query 
+SELECT p.postid, p.title, p.description, p.created\_at, i1.avatar \\
+FROM posts p, items i1 \\
+WHERE p.item = i1.itemid\\
+AND p.item NOT IN \\
+\strut\hspace*{3ex} (SELECT i.itemid FROM items i WHERE i.owner = email);
 
 \subsection{Queries using INNER JOIN}
 
@@ -244,12 +306,39 @@ WHERE b.post = p.postid AND p.postid = postid;\\
 \subsection{Queries using set operations}
 
 \subsection{Insertions, Deletions and Updates}
-INSERT INTO bids (bidder, post, points) VALUES (email, postid, points);
-INSERT INTO loans (bid, post, status) values(\$bidId, postid, using\_status);
-INSERT INTO items (description, available, name, owner, avatar) values (description,
-                   available, name, owner, filename);
-INSERT INTO posts (item, title, location, description) VALUES (itemId, title, location, description);
-INSERT INTO bids (status, bidder, post, points) VALUES ('FAILURE', email, postid, point);
+The following query inserts one bidding record into the bids table.\\\\
+INSERT INTO bids (bidder, post, points) VALUES (email, postid, points);\\\\
+The following query inserts one loan record into the loans table.\\\\
+INSERT INTO loans (bid, post, status) VALUES(bidid, postid, using\_status);\\\\
+The following query inserts one item record into the items table.\\\\
+INSERT INTO items (description, available, name, owner, avatar) VALUES (description, \\ \strut\hspace*{3ex}available, name, owner, filename);\\\\
+The following query inserts one post record into the posts table.\\\\
+INSERT INTO posts (item, title, location, description) VALUES (itemid, title, location, \\ \strut\hspace*{3ex}description);\\\\
+The following query inserts one unsuccessful bidding record into the bids table.\\\\
+INSERT INTO bids (status, bidder, post, points) VALUES (`FAILURE', email, postid, point);\\\\
+The following query deletes one bidding record.\\\\
+DELETE FROM bids\\
+WHERE bids.bidid = bidid;\\\\
+The following query deletes one post record.\\\\
+DELETE from posts\\
+WHERE posts.postid = postid;\\\\
+The following query updates the bidding points for one particular bidding.\\\\
+UPDATE bids\\
+SET bids.points = points\_updated \\
+WHERE bids.bidid = bidid;\\\\
+The following query sets the bidding status to success\\\\
+UPDATE bids\\
+SET bids.status = 'SUCCESS'\\
+WHERE bids.bidid = bidid;\\
+UPDATE users set users.points\_available = users.points\_available + points where users.id = userid;\\\\
+The following query updates the loan information to be `returned' after the borrowed item has been returned to the owner.\\\\
+UPDATE loans l\\
+SET l.status = `RETURNED'\\
+WHERE l.loanid = loanid;\\\\
+The following query updates the post information of a particular post specified by postid.\\\\
+UPDATE posts\\
+SET posts.title = title, posts.location = location, posts.description = description\\
+WHERE posts.postid = postid;
 
 \subsection{Query using view}
 Create a view item\_popularity which contains all the popularity information about the items.\\\\
@@ -265,7 +354,7 @@ WHERE u.email = i.owner\\
 GROUP BY u.email;\\\\
 The following query selects the average popularity of the items bided by each user.\\\\
 SELECT u.email, AVERAGE(i.popularity)\\
-FROM users u, item\_popularity i, posts p, bids b, loans loans\\
+FROM users u, item\_popularity i, posts p, bids b, loans l\\
 WHERE u.email = b.bidder AND b.bidid = l.bid AND b.post = p.postid AND p.item = i.itemid\\
 GROUP BY u.email;\\\\
 The following query remove the view created.\\\\
@@ -294,7 +383,7 @@ Other users will be able to log in via this page.
 \newpage
 
 \subsection{Application}
-Upon logging in, the user will be directed to his dashboard. He can easily see the points available for him or her. Besides that, the items the user owning, the posts he or she has submitted, the posts the user is currently bidding and the items the user is currently borrowing will be displayed sequentially thought this the page.\\
+Upon logging in, the user will be directed to his/her dashboard. He can easily see the points available for him or her. Besides that, the items the user owning, the posts he or she has submitted, the posts the user is currently bidding for and the items the user is currently borrowing will be displayed sequentially throughout this the page.\\
 \begin{figure}[h]
       \centering
 	\includegraphics[scale=0.3]{dashboard.png}
@@ -311,43 +400,6 @@ There is a special type of user called admin user. They have their admin column 
 \end{figure}
 As shown in this screen shot, the admin user can access any entries inside this application. If he or she wants to manage the current users, they can do so by clicking the user management button and the user records can be updated, deleted or created on our administration user management panel.
 
-\newpage
-
-\section{Sample table and diagram insertion}
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\hline
-StrikePrice & Closed-form formula & Ordinary Monte Carlo & Control Variate\\
-\hline
-105&10.0022021172&10.005252032814727& 10.005252032814751\\
-110&8.02638469385&8.0166707887876427& 8.016670788787664\\ 
-115&6.37924904693&6.3659464432937911& 6.3659464432937733\\ 
-120&5.02541348179&5.0148870431746415& 5.0148870431746184\\
-125&3.92690420603&3.9241698581683577& 3.9241698581683728\\
-130&3.04592058431&3.044679765401427&  3.0446797654014213\\
-135&2.34679877596&2.3310307686205207& 2.3310307686205225\\
-140&1.79723400902&1.8055531375480696& 1.8055531375480751\\
-145&1.36889248498&1.3630119824610754& 1.3630119824610734\\
-150&1.03756650489&1.0254470920297398& 1.0254470920297361\\
-155&0.783018613011&0.77819086371547286&0.77819086371547308\\
-160&0.588637155719&0.5924848566970754& 0.59248485669707973\\
-165&0.440997057228&0.44342591182216823&0.4434259118221664\\
-170&0.329392108384&0.32449718396190719&0.32449718396190735\\
-175&0.245381782063&0.2462392632801686& 0.24623926328016907\\
-180&0.182377553986&0.17995020687354496&0.1799502068735449\\
-185&0.13528073067&0.13478417666883458&0.13478417666883413\\
-190&0.100175092579&0.099449778570450814&0.099449778570450523\\
-195&0.0740722950356&0.074452813719303179&0.074452813719303304\\
-200&0.0547050187389&0.051631534936688268&0.051631534936688074\\
-\hline
-\end{tabular}
-\end{center}
-
-\begin{figure}[h]
-      \centering
-	\includegraphics[scale=0.45]{DefaultItem.png}
-      \caption{Effect of control variate in pricing European call options}
-\end{figure}
 \newpage
 
 \section{Conclusion}
