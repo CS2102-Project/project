@@ -212,7 +212,28 @@ created\_at & TIMESTAMP \\
 
 \subsection{Simple Queries}
 
+The following simple query returns all the information about one particular bidding made. This is displayed when the bidder wants to edit his own bidding.\\
+\\
+SELECT * \\
+FROM bids\\
+WHERE bids.bidid = bidid;\\\\
+The following simple query returns all the information about all the items. This is displayed when user accesses the `items' page.\\
+SELECT * \\
+FROM item i;\\\\
+The following simple query returns all the information about one particular post. This is displayed when the poster wants to edit his own post.\\
+SELECT * \\
+FROM posts \\
+WHERE posts.postid = postid;\\\\
+The following simple query returns all the information about one user with userid specified. This is displayed when the user visited his `user' page.\\
+SELECT * \\
+FROM users \\
+WHERE users.id = userid;\\
+
 \subsection{Aggregate Queries}
+The following aggregate query returns the maximum bidding points for one particular post with postid specified. This is displayed when the poster wants to check the maximum bid made for his post.\\\\
+SELECT MAX(b.points)\\
+FROM bids b, posts p\\
+WHERE b.post = p.postid AND p.postid = postid;\\
 
 \subsection{Nested Queries}
 
@@ -223,8 +244,33 @@ created\_at & TIMESTAMP \\
 \subsection{Queries using set operations}
 
 \subsection{Insertions, Deletions and Updates}
+INSERT INTO bids (bidder, post, points) VALUES (email, postid, points);
+INSERT INTO loans (bid, post, status) values(\$bidId, postid, using\_status);
+INSERT INTO items (description, available, name, owner, avatar) values (description,
+                   available, name, owner, filename);
+INSERT INTO posts (item, title, location, description) VALUES (itemId, title, location, description);
+INSERT INTO bids (status, bidder, post, points) VALUES ('FAILURE', email, postid, point);
 
-\subsection{Stored Procedures and Triggers}
+\subsection{Query using view}
+Create a view item\_popularity which contains all the popularity information about the items.\\\\
+CREATE VIEW item\_popularity AS\\
+SELECT i.itemid as itemid, i.owner as owner, COUNT(*) AS popularity\\
+FROM items i, posts p, bids b\\
+WHERE i.itemid = p.item AND p.postid = b.post\\
+GROUP BY i.itemid, i.owner;\\\\
+The following query selects the average popularity of the items posted by each user.\\\\
+SELECT u.email, AVERAGE(i.popularity)\\
+FROM users u, item\_popularity i\\
+WHERE u.email = i.owner\\
+GROUP BY u.email;\\\\
+The following query selects the average popularity of the items bided by each user.\\\\
+SELECT u.email, AVERAGE(i.popularity)\\
+FROM users u, item\_popularity i, posts p, bids b, loans loans\\
+WHERE u.email = b.bidder AND b.bidid = l.bid AND b.post = p.postid AND p.item = i.itemid\\
+GROUP BY u.email;\\\\
+The following query remove the view created.\\\\
+DROP VIEW if exists item\_popularity
+
 
 \newpage
 
