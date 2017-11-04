@@ -12,6 +12,7 @@ password VARCHAR(64) NOT NULL,
 mobile INT NOT NULL,
 address VARCHAR(128), 
 points_available INT DEFAULT 500,
+admin INT DEFAULT 0,
 credit_rating NUMERIC CHECK (credit >= 0 AND credit <= 5),
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
