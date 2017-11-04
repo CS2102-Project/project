@@ -65,6 +65,7 @@ FROM bids b, posts p
 WHERE b.post = p.postid AND p.postid = postid;
 
 -- This query should be run only once
+--DROP VIEW if exists item_popularity
 --CREATE VIEW item_popularity AS
 --SELECT i.itemid as itemid, i.owner as owner, COUNT(*) AS popularity
 --FROM items i, posts p, bids b
