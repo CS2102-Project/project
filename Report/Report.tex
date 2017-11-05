@@ -89,11 +89,11 @@ throughout the course of this project.
 In this project, we are required to build a stuff sharing website. the system allows people to borrow or lend stuff that they own (tools, appliances, furniture or books) either free or for a fee. Users advertise stuff available (what stuff, where to pick up and return, when it is available, etc.) or can browse the available stuff and bid to borrow some stuff. The stuff owner or the system (your choice) chooses the successful bid. Each user has an account. Administrators can create, modify and delete all entries.
 \subsection{Developing Specifications}
 
-After seeing through the relevant products specifications and the website requirements, we decided to use $PHP$ as back end programming language, $Javascript$ as front end developing language, $MySQL$ as our database. We used $Laravel$, which is the most popular web application framework for $PHP$.\\
+After seeing through the relevant products specifications and the website requirements, we decided to use \textit{PHP} as back end programming language, \textit{Javascript} as front end developing language, \textit{MySQL} as our database. We used \textit{Laravel}, which is the most popular web application framework for \textit{PHP}.\\
 \\
-From the project requirement, Eloquent ORM in built in Laravel to access and manipulate the database is not allowed. Therefore, anything related to database management, access, and manipulation is down by importing $PHP$ $mysqli$ library and execute raw $SQL$ queries.\\
+From the project requirement, Eloquent ORM in built in Laravel to access and manipulate the database is not allowed. Therefore, anything related to database management, access, and manipulation is down by importing \textit{PHP} \textit{mysqli} library and execute raw \textit{SQL} queries.\\
 \\
-To develop this web application, we utilise the Model View Controller ($MVC$) framework.\\
+To develop this web application, we utilise the Model View Controller (\textit{MVC}) framework.\\
 
 \begin{figure}[h]
       \centering
@@ -101,12 +101,9 @@ To develop this web application, we utilise the Model View Controller ($MVC$) fr
       \caption{Model View Controller (MVC)}
 \end{figure}
 
-We use $CSS$ Scaffolding in Laravel to take care of the views. Buttons and redirections from the user side are implemented in $Javascript$. The models and controllers are written in $PHP$. The specific $MySQL$ database we used it $root$ user's database named $blog$. The website is still hosted on \url{localhost:8000} only.\\
+We use \textit{CSS} Scaffolding in Laravel to take care of the views. Buttons and redirections from the user side are implemented in \textit{Javascript}. The models and controllers are written in \textit{PHP}. The specific \textit{MySQL} database we used it \textit{root} user's database named \textit{blog}. The website is still hosted on \url{localhost:8000} only.\\
 \\
-From our modelling for this problem, there are two types of users. The admin users will have different interfaces and unlimited access to all entries. From the user management button in the admin user's profile page. All the users information can be modified and deleted. New users can be added on this panel as well.\\
-\\
-
-\newpage
+From our modelling for this problem, there are two types of users. The admin users will have different interfaces and unlimited access to all entries. From the user management button in the admin user's profile page. All the users information can be modified and deleted. New users can be added on this panel as well.
 
 \section{Database Design}
 
@@ -252,6 +249,11 @@ CHECK (start $<$ end)\\
 );
 
 \subsection{Schema Functions}
+The \textit{users} entity stores user information such as username, email, password, address etc. A user can have three different roles, namely owner of item, borrower or admin. An item owner can add posts to indicate the available periods for lending their items. A borrower can browse through the posts to bid for an item. An admin user is able to access information of all users through a user management panel which will be elaborated in section $4.4$.\\
+The \textit{items} entity stores all information related to a specific item, including its owner, item name, type, description, and availability. An item must have exactly one valid owner but a user may not necessarily possess any items.\\
+The \textit{posts} entity stores information about an available item, such as start date and end date of one’s available period, fee, location for taking the item and description. Borrowers could choose to borrow items based on this information.\\
+The \textit{bids} entity stores information such as bidder's email, post bidded, bidding points, and status(success or failure). Bidders need to offer a price(bidding points) to indicate how much they need to borrow this item.\\
+The \textit{loans} entity stores information such as the successful bid, associated post, start date and end date, and status of the loan(returned or not). Owners of items need to indicate that the item has been returned in the loans table once the successful bidder returns it.
 
 \newpage
 
@@ -259,26 +261,26 @@ CHECK (start $<$ end)\\
 
 \subsection{Simple Queries}
 
-The following simple query returns all the information about one particular bidding specified by bidid. This is displayed when the bidder wants to edit his own bidding.\\
+The following simple query returns all the information about one particular bidding specified by bidid 101. This is displayed when the bidder wants to edit his own bidding.\\
 \\
 SELECT * \\
 FROM bids\\
-WHERE bids.bidid = bidid;\\\\
+WHERE bids.bidid = 101;\\\\
 The following simple query returns all the information about all the items. This is displayed when user accesses the `items' page.\\
 SELECT * \\
 FROM item i;\\\\
-The following simple query returns all the information about one particular post. This is displayed when the poster wants to edit his own post.\\
+The following simple query returns all the information about one particular post specified by postid 251. This is displayed when the poster wants to edit his own post.\\
 SELECT * \\
 FROM posts \\
-WHERE posts.postid = postid;\\\\
-The following simple query returns all the information about one user with userid specified. This is displayed when the user visited his `user' page.\\
+WHERE posts.postid = 251;\\\\
+The following simple query returns all the information about one user with userid specified as 36. This is displayed when the user visited his `user' page.\\
 SELECT * \\
 FROM users \\
-WHERE users.id = userid;\\\\
-The following simple query returns all the information about the posts of a particular user specified by his/her email.\\\\
+WHERE users.id = 36;\\\\
+The following simple query returns all the information about the posts of a particular user specified by his/her email `typical\_user@gmail.com'.\\\\
 SELECT * \\
 FROM posts p, items i \\
-WHERE p.item = i.itemid AND i.owner = email;\\\\
+WHERE p.item = i.itemid AND i.owner = `typical\_user@gmail.com';\\\\
 The following simple query returns all the information about the transaction history between two users, i.e. their usernames, bidding points, bidding time.\\\\
 SELECT u1.username as owner, u2.username as bidder, b.points, b.updated\_at as time\\
 FROM users u1, users u2, bids b, items i, posts p\\
@@ -286,24 +288,18 @@ WHERE b.bidder = u2.email AND b.post = p.postid AND p.item = i.itemid AND i.owne
 AND (b.bidder = email OR i.owner = email);
 
 \subsection{Aggregate Queries}
-The following aggregate query returns the maximum bidding points for one particular post with postid specified. This is displayed when the poster wants to check the maximum bid made for his post.\\\\
+The following aggregate query returns the maximum bidding points for one particular post with postid specified as 251. This is displayed when the poster wants to check the maximum bid made for his post.\\\\
 SELECT MAX(b.points)\\
 FROM bids b, posts p\\
-WHERE b.post = p.postid AND p.postid = postid;
+WHERE b.post = p.postid AND p.postid = 251;
 
 \subsection{Nested Queries}
-The following nested query 
+The following nested query selects all the information about the items not owned by the user logged in with the email specified as `typical\_user@gmail.com'\\\\
 SELECT p.postid, p.title, p.description, p.created\_at, i1.avatar \\
 FROM posts p, items i1 \\
 WHERE p.item = i1.itemid\\
 AND p.item NOT IN \\
-\strut\hspace*{3ex} (SELECT i.itemid FROM items i WHERE i.owner = email);
-
-\subsection{Queries using INNER JOIN}
-
-\subsection{Queries using EXISTS}
-
-\subsection{Queries using set operations}
+\strut\hspace*{3ex} (SELECT i.itemid FROM items i WHERE i.owner = `typical\_user@gmail.com');
 
 \subsection{Insertions, Deletions and Updates}
 The following query inserts one bidding record into the bids table.\\\\
@@ -396,7 +392,7 @@ There is a special type of user called admin user. They have their admin column 
 \begin{figure}[h]
       \centering
 	\includegraphics[scale=0.3]{admin.png}
-      \caption{User login page}
+      \caption{User management panel}
 \end{figure}
 As shown in this screen shot, the admin user can access any entries inside this application. If he or she wants to manage the current users, they can do so by clicking the user management button and the user records can be updated, deleted or created on our administration user management panel.
 
