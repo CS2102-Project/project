@@ -311,38 +311,41 @@ AND p.item NOT IN \\
 
 \subsection{Insertions, Deletions and Updates}
 The following query inserts one bidding record into the bids table.\\\\
-INSERT INTO bids (bidder, post, points) VALUES (email, postid, points);\\\\
+INSERT INTO bids (bidder, post, points) VALUES (`typical\_user@gmail.com', 251, 200);\\\\
 The following query inserts one loan record into the loans table.\\\\
-INSERT INTO loans (bid, post, status) VALUES(bidid, postid, using\_status);\\\\
+INSERT INTO loans (bid, post, status) VALUES(101, 251, `ONLOAN');\\\\
 The following query inserts one item record into the items table.\\\\
-INSERT INTO items (description, available, name, owner, avatar) VALUES (description, \\ \strut\hspace*{3ex}available, name, owner, filename);\\\\
+INSERT INTO items (description, available, name, owner, avatar) VALUES (`Nil', \\ \strut\hspace*{3ex}1, `User', `typical\_user@gmail.com', `file\_name');\\\\
 The following query inserts one post record into the posts table.\\\\
-INSERT INTO posts (item, title, location, description) VALUES (itemid, title, location, \\ \strut\hspace*{3ex}description);\\\\
+INSERT INTO posts (item, title, location, description) VALUES (47, `Available aircon', `NUS', \\ \strut\hspace*{3ex} `Nil');\\\\
 The following query inserts one unsuccessful bidding record into the bids table.\\\\
-INSERT INTO bids (status, bidder, post, points) VALUES (`FAILURE', email, postid, point);\\\\
-The following query deletes one bidding record.\\\\
+INSERT INTO bids (status, bidder, post, points) VALUES (`FAILURE', `typical\_user@gmail.com', 251, 200);\\\\
+The following query deletes one bidding record specified by bidid 101.\\\\
 DELETE FROM bids\\
-WHERE bids.bidid = bidid;\\\\
-The following query deletes one post record.\\\\
+WHERE bids.bidid = 101;\\\\
+The following query deletes one post record specified by postid 251.\\\\
 DELETE from posts\\
-WHERE posts.postid = postid;\\\\
+WHERE posts.postid = 251;\\\\
 The following query updates the bidding points for one particular bidding.\\\\
 UPDATE bids\\
-SET bids.points = points\_updated \\
-WHERE bids.bidid = bidid;\\\\
-The following query sets the bidding status to success\\\\
+SET bids.points = 300 \\
+WHERE bids.bidid = 101;\\\\
+The following query sets the bidding status to success.\\\\
 UPDATE bids\\
 SET bids.status = 'SUCCESS'\\
-WHERE bids.bidid = bidid;\\
-UPDATE users set users.points\_available = users.points\_available + points where users.id = userid;\\\\
+WHERE bids.bidid = 101;\\\\
+The following query increases the available points of the user specified by userid 36\\\\
+UPDATE users\\
+SET users.points\_available = users.points\_available + 100 \\
+WHERE users.id = 36;\\\\
 The following query updates the loan information to be `returned' after the borrowed item has been returned to the owner.\\\\
 UPDATE loans l\\
 SET l.status = `RETURNED'\\
-WHERE l.loanid = loanid;\\\\
-The following query updates the post information of a particular post specified by postid.\\\\
+WHERE l.loanid = 27;\\\\
+The following query updates the post information of a particular post specified by postid 251.\\\\
 UPDATE posts\\
 SET posts.title = title, posts.location = location, posts.description = description\\
-WHERE posts.postid = postid;
+WHERE posts.postid = 251;
 
 \subsection{Query using view}
 Create a view item\_popularity which contains all the popularity information about the items.\\\\
