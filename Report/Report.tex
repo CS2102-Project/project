@@ -59,29 +59,29 @@
 % the region between \begin{document} ... \end{document} is known as the 'text'
 \begin{document}
 \begin{titlepage}
+\begin{figure}[h]
+      \centering
+	\includegraphics[scale=0.6]{logo.png}
+\end{figure}
 	\centering
 	\vspace*{.09\textheight}
 	{\LARGE\bfseries CS2102 Database\\
 Project Report\par}
 	\vspace{1.5cm}
-	{\huge Carolend\par}
+	{\huge Caroulend\par}
 	\vspace{1cm}
-	{\scshape\Large Dong Shaocong, He Xinyi, Liu Yulin, Wang Zexin\par}
-	\vspace{6cm}
+	{\scshape\Large Dong Shaocong A0148008J\par}
+	{\scshape\Large He Xinyi A0141132B\par}
+	{\scshape\Large Liu Yulin A0148052L\par}
+	{\scshape\Large Wang Zexin A0143409J\par}
+	\vspace{3cm}
 	
 	\vspace{3cm}
-	{\Large Department of Mathematics\\[3mm]
-National University of Singapore\\[3mm]
-AY2017/18 Semester 1\par}
+
+	{AY2017/18 Semester 1\par}
+	{6 Nov. 2017\par}
 \end{titlepage}
 
-\section*{Abstract}
-\newpage
-
-\section*{Acknowledge}
-We would like to thank Associate Professor Bressan Stephane for his helpful supervision
-throughout the course of this project.
-\newpage
 \tableofcontents
 \newpage
 
@@ -398,6 +398,14 @@ Upon logging in, the user will be directed to his/her dashboard. He can easily s
 \end{figure}
 In addition, from the top right drop down list, the user can go to other pages ranging form his or her using statistics. User can also create new item, go to the posting markets and checkout current transactions and transacting history. This includes the user's posts that are being bid by other users, the user's current lending items and the past transactions.
 
+\begin{figure}[h]
+      \centering
+	\includegraphics[scale=0.3]{transactionCentre.png}
+      \caption{transaction centre page}
+\end{figure}
+
+From the transaction centre, users will be able to see their posts that are being bid, their posts (items) that are currently lent to others, and their past transactions (both for lending and borrowing).
+
 \subsection{Administration}
 There is a special type of user called admin user. They have their admin column equal to 1 and the can have unlimited access to access, delete, update and create any entries in our database. Users are not able to sign up an admin account. The only possible way to become an admin is to update the table in our database directly. Implemented in this way, the administration page is very secure and the current normal users' information are properly protected.
 \begin{figure}[h]
@@ -407,33 +415,6 @@ There is a special type of user called admin user. They have their admin column 
 \end{figure}
 As shown in this screen shot, the admin user can access any entries inside this application. If he or she wants to manage the current users, they can do so by clicking the user management button and the user records can be updated, deleted or created on our administration user management panel.
 
-\newpage
 
-\section{Conclusion}
 
-correct way of citing something: \cite{PythonForFinance}
-
-\newpage
-\begin{thebibliography}{9}
-\bibitem{PythonForFinance} 
-Yves Hilpisch,
-\textit{Python for Finance}. 
-O'Reilly Media, 2015.
- 
-\bibitem{VarianceReduction} 
-Paul Glasserman,
-\textit{Monte Carlo methods in financial engineering}.
-Springer, 2010.
-
-\bibitem{FiniteDifference} 
-Daniel Duffy,
-\textit{Finite difference methods in financial engineering: A partial differential equation approach}.
-John Wiley\&Sons, 2006.
-
-\bibitem{ContinuityCorrection} 
-Mark Broadie, Paul Glasserman, Steven Kou,
-\textit{A Continuity Correction for Discrete Barrier Options}.
-Mathematical Finance, 1997.
-
-\end{thebibliography}
 \end{document}
